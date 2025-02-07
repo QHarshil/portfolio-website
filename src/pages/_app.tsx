@@ -1,0 +1,1 @@
+// Custom App component to include global styles and providers
