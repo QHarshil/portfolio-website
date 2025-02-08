@@ -1,1 +1,148 @@
-/* Global CSS and Tailwind directives */
+/* 
+  src/styles/globals.css
+  ======================
+  
+  Global CSS for the Portfolio Website
+  
+  Purpose:
+  - Import Tailwind CSS base styles, component classes, and utility classes.
+  - Define custom CSS variables for theming (light/dark mode), typography, spacing, and color tokens.
+  - Apply global resets and default styles for consistent rendering across browsers.
+  - Establish foundational accessibility and responsive design enhancements.
+  
+  Design Considerations:
+  - Leveraging Tailwind CSS for rapid, responsive, and utility-first styling.
+  - Using CSS Custom Properties to allow dynamic theming and easy future updates.
+  - Including a comprehensive CSS reset to ensure a consistent baseline across different browsers.
+  - Adding media queries to support dark mode automatically based on user system preferences.
+  - Modular approach: all global definitions are centralized here for maintainability and scalability.
+  
+  Author: [Your Name]
+  Date: [Today's Date]
+*/
+
+/* -----------------------------------------------------------------------------
+   Tailwind CSS Directives
+   -----------------------------------------------------------------------------
+   These directives import Tailwind's base, component, and utility styles.
+----------------------------------------------------------------------------- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -----------------------------------------------------------------------------
+   CSS Custom Properties (Design Tokens)
+   -----------------------------------------------------------------------------
+   Define global variables for colors, fonts, spacing, and other design tokens.
+   These tokens ensure consistency throughout the application and support easy
+   updates and theming (e.g., for dark/light modes).
+----------------------------------------------------------------------------- */
+:root {
+  /* Color Tokens */
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-primary: #0070f3;
+  --color-secondary: #ff4081;
+
+  /* Typography */
+  --font-body: 'Arial', sans-serif;
+  --font-heading: 'Helvetica Neue', sans-serif;
+
+  /* Spacing & Sizing */
+  --space-base: 1rem; /* Base spacing unit */
+  --border-radius: 0.375rem; /* 6px rounded corners */
+}
+
+/* -----------------------------------------------------------------------------
+   Dark Mode Support
+   -----------------------------------------------------------------------------
+   Adjust the CSS variables when the user’s system indicates a preference for dark mode.
+----------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #0a0a0a;
+    --color-foreground: #ededed;
+    --color-primary: #79b8ff;
+    --color-secondary: #ff79c6;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   Global Reset & Base Styling
+   -----------------------------------------------------------------------------
+   Apply a comprehensive CSS reset to ensure consistency across browsers,
+   then define base styles for common HTML elements.
+----------------------------------------------------------------------------- */
+/* CSS Reset: Remove default margins, paddings, and borders */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Set base line-height and default font for body */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* -----------------------------------------------------------------------------
+   Default Element Styles & Utility Classes
+   -----------------------------------------------------------------------------
+   Provide default styles for common elements to ensure accessibility and consistency.
+----------------------------------------------------------------------------- */
+
+/* Anchor tags */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+/* Responsive container utility */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-base);
+  padding-right: var(--space-base);
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* -----------------------------------------------------------------------------
+   Accessibility Enhancements
+   -----------------------------------------------------------------------------
+   Define focus styles to ensure interactive elements are clearly visible 
+   for keyboard users.
+----------------------------------------------------------------------------- */
+:focus {
+  outline: 2px dashed var(--color-primary);
+  outline-offset: 2px;
+}

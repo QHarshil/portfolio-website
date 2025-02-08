@@ -1,0 +1,472 @@
+Overview of the Roadmap
+
+    Project Initialization & File Structure Setup
+    Global Styles & Theme Configuration
+    Root Layout & Metadata (App Router)
+    Theme Context & Custom Hooks
+    Core Pages (Home, About, Projects, Project Detail, Contact, and API)
+    Reusable UI Components
+    Advanced Features & Animations
+    Testing Setup
+    CI/CD Pipeline & Deployment
+    Final Polish & Documentation
+
+Each section below explains what files you’ll work on, the order you should develop them, and the purpose of each file.
+1. Project Initialization & File Structure Setup
+
+Goal: Set up a new Next.js project with TypeScript, initialize Git, configure CI/CD, and create the desired folder structure (with emphasis on using the App Router).
+
+Steps:
+
+    Initialize the Project:
+    Run in PowerShell:
+
+npx create-next-app@latest --typescript portfolio-website
+cd portfolio-website
+
+Initialize Git & Connect to Remote:
+
+    git init
+    git add .
+    git commit -m "Initial commit: Create Next.js project with TypeScript"
+    git remote add origin https://github.com/YourUsername/portfolio-website.git
+    git push -u origin main
+
+    File Structure Update:
+    Use a PowerShell script (as provided previously) to create extra directories and placeholder files.
+    Folders to create under src:
+        app/ (for all routes using the App Router)
+            about/
+            projects/
+            project/[id]/
+            contact/
+            api/contact/
+        components/ (with subfolders like common/, ui/, etc.)
+        context/
+        hooks/
+        graphql/ (if needed)
+        styles/
+        utils/
+        views/ (optional)
+        tests/ (with subfolders matching your component/page structure)
+
+Tip: Verify using the tree command.
+2. Global Styles & Theme Configuration
+File: src/styles/globals.css
+
+Purpose:
+
+    Import Tailwind’s base, components, and utilities.
+    Set up global resets and CSS variables for colors (light/dark mode), typography, etc.
+
+Content Example:
+
+/* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Variables */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Global body styling */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Arial', sans-serif;
+}
+
+File: src/styles/theme.ts
+
+(Optional but recommended for a design system)
+
+Purpose:
+
+    Define a theme object (colors, breakpoints, spacing) that can be used with styled components or in your context.
+
+Content Example:
+
+// src/styles/theme.ts
+export const theme = {
+  colors: {
+    background: 'var(--background)',
+    foreground: 'var(--foreground)',
+    primary: '#0070f3',
+    // add additional colors as needed
+  },
+  breakpoints: {
+    mobile: '640px',
+    tablet: '768px',
+    desktop: '1024px',
+  },
+  // More design tokens can be added here
+};
+
+3. Root Layout & Metadata (App Router)
+File: src/app/layout.tsx
+
+Purpose:
+
+    This is the root layout that wraps every page.
+    It imports global CSS, sets up SEO metadata, integrates Google fonts (or other fonts), and wraps children with a ThemeProvider.
+
+Order & Content:
+
+    Import Global CSS & Fonts:
+    Use Next.js’s built-in next/font/google to optimize font loading.
+    Define Metadata:
+    Use the Metadata type for SEO, Open Graph, etc.
+    Wrap Children with ThemeProvider:
+    Ensure the entire app has access to theme state.
+
+Example Implementation:
+
+// src/app/layout.tsx
+/**
+ * RootLayout Component
+ *
+ * This file defines the root layout using the Next.js App Router.
+ * It imports global CSS, Google fonts, metadata, and wraps the application
+ * in a ThemeProvider to manage dark/light mode.
+ */
+
+import type { Metadata } from "next";
+import React from "react";
+import { Geist, Geist_Mono } from "next/font/google";
+import "../styles/globals.css"; // Global styles
+import ThemeProvider from "../context/ThemeContext"; // Theme context provider
+
+// Initialize Google Fonts with CSS custom properties
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+// Define global metadata for SEO and social sharing
+export const metadata: Metadata = {
+  title: "Your Portfolio | Advanced Frontend Engineer",
+  description:
+    "A comprehensive portfolio showcasing advanced frontend skills and modern web technologies.",
+  openGraph: {
+    title: "Your Portfolio",
+    description:
+      "A comprehensive portfolio showcasing advanced frontend skills and modern web technologies.",
+    url: "https://yourportfolio.com", // Replace with your URL
+    siteName: "Your Portfolio",
+    images: [
+      {
+        url: "https://yourportfolio.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Your Portfolio",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <head>{/* Additional head tags can be inserted here */}</head>
+      <body className="antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+
+4. Theme Context & Custom Hooks
+File: src/context/ThemeContext.tsx
+
+Purpose:
+
+    Create a React Context that holds the theme state (e.g., light or dark).
+    Provide functions to toggle the theme.
+    Persist theme choice (using localStorage).
+
+Content Outline:
+
+    Define a context and provider.
+    Use React’s state and useEffect hooks for persistence.
+    Add clear, concise inline comments.
+
+File: src/hooks/useTheme.ts
+
+Purpose:
+
+    A custom hook that provides easy access to the theme context.
+    Returns the current theme and toggling function.
+
+File: src/hooks/useScroll.ts
+
+Purpose:
+
+    Track window scroll position for dynamic UI changes (like sticky headers or animations).
+
+File: src/hooks/useDebounce.ts
+
+Purpose:
+
+    Debounce a value or function to prevent performance issues during rapid state changes.
+
+Note: Develop these one by one with detailed comments and tests later.
+5. Core Pages (Using the App Router)
+
+Each page file is placed under src/app/ with nested folders for routes. Build simple versions first, then iterate with more functionality and advanced features.
+5.1 Home Page
+
+File: src/app/page.tsx
+
+Purpose:
+
+    Create an engaging hero section.
+    Introduce yourself with a brief bio.
+    Include call-to-action elements (e.g., buttons to view projects).
+
+Implementation Tips:
+
+    Use Tailwind CSS classes for layout.
+    Integrate Framer Motion for subtle animations.
+
+5.2 About Page
+
+File: src/app/about/page.tsx
+
+Purpose:
+
+    Present your biography and professional background.
+    Include an “About This Project” section that details your tech stack, design decisions, and challenges.
+    Link to your resume and social profiles.
+
+5.3 Projects Overview Page
+
+File: src/app/projects/page.tsx
+
+Purpose:
+
+    Display a grid or masonry layout of your projects.
+    Each project should have a card with an image, title, and a short description.
+    Cards will later link to the detailed project page.
+
+5.4 Dynamic Project Detail Page
+
+File: src/app/project/[id]/page.tsx
+
+Purpose:
+
+    Dynamically render a detailed view for a project based on the URL parameter.
+    Include demo videos/images, technical explanations, and case study details.
+    Use Next.js’s dynamic routing API to extract parameters.
+
+Example Starter Code:
+
+// src/app/project/[id]/page.tsx
+import { useParams } from "next/navigation";
+
+export default function ProjectDetail() {
+  const { id } = useParams();
+  return (
+    <main>
+      <h1>Project Details for {id}</h1>
+      {/* Detailed project content goes here */}
+    </main>
+  );
+}
+
+5.5 Contact Page
+
+File: src/app/contact/page.tsx
+
+Purpose:
+
+    Build a contact form with fields for name, email, and message.
+    Include client-side validation (using Formik/Yup or custom validation).
+    Provide interactive feedback (loading spinners, success/error notifications).
+
+5.6 API Endpoint for Contact Form
+
+File: src/app/api/contact/route.ts
+
+Purpose:
+
+    Create a serverless endpoint that processes contact form submissions.
+    Follow the App Router API conventions (export POST, etc.).
+    Return JSON responses indicating success or failure.
+
+Example Starter Code:
+
+// src/app/api/contact/route.ts
+import { NextResponse } from "next/server";
+
+export async function POST(request: Request) {
+  const data = await request.json();
+  // Process contact form data (e.g., send an email)
+  return NextResponse.json({ success: true, message: "Submission received" });
+}
+
+6. Reusable UI Components
+
+Build these in the src/components/ folder and import them into your pages. This helps keep your code modular and maintainable.
+Key Components:
+
+    Header & Footer (e.g., src/components/common/Header.tsx & Footer.tsx):
+        Navigation links (Home, About, Projects, Contact)
+        Theme toggle button (using useTheme hook)
+    Button Component:
+    A customizable button that supports different variants (primary, secondary, etc.).
+    Project Card Component:
+    A card for displaying project summaries in the Projects Overview page.
+    Modal/Alert Components:
+    Optional components for detailed pop-ups or user notifications.
+
+Each component should include industry-standard comments and be written in a modular, reusable way.
+7. Advanced Features & Animations
+Integrate Framer Motion:
+
+    Add subtle animations to:
+        Hero sections (e.g., fade in, slide)
+        Hover effects on buttons or cards
+        Page transitions
+
+Responsive & Accessible Design:
+
+    Ensure layouts work across mobile, tablet, and desktop.
+    Add ARIA attributes and keyboard accessibility to interactive components.
+    Optimize images using Next.js’s <Image> component.
+
+8. Testing Setup
+Unit & Integration Testing:
+
+    Testing Framework:
+    Use Jest and React Testing Library.
+    File Organization:
+    Create test files mirroring your component structure (e.g., tests/components/Header.test.tsx).
+
+End-to-End Testing (Optional):
+
+    E2E Framework:
+    Use Cypress to simulate user flows (navigating pages, submitting the contact form).
+
+9. CI/CD Pipeline & Deployment
+CI/CD Setup:
+
+    GitHub Actions Workflow:
+    Create .github/workflows/ci.yml with steps to:
+        Checkout code
+        Set up Node.js
+        Install dependencies
+        Run linting (ESLint)
+        Run tests (Jest)
+        Build the project
+
+Example Workflow (from previous instructions):
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Lint
+        run: npm run lint
+      - name: Run Tests
+        run: npm test
+      - name: Build
+        run: npm run build
+
+Deployment:
+
+    Connect your GitHub repository to Vercel, Netlify, or another hosting platform.
+    Ensure environment variables (if any) are set up in the hosting dashboard.
+    Verify production build with:
+
+    npm run build && npm start
+
+10. Final Polish & Documentation
+Polish UI/UX:
+
+    Refine animations, micro-interactions, and responsive behavior.
+    Optimize performance using code splitting and lazy loading.
+
+Documentation:
+
+    Update README.md with:
+        An “About This Project” section
+        Architecture overview
+        Key design decisions (why App Router, custom hooks, CI/CD, etc.)
+        Instructions for local development and deployment
+
+    Optionally, record a video walkthrough or write a blog post detailing your process.
+
+File Work Order Summary
+
+    Global Setup:
+        src/styles/globals.css
+        src/styles/theme.ts
+
+    Root Layout:
+        src/app/layout.tsx
+
+    Theme & Context:
+        src/context/ThemeContext.tsx
+        src/hooks/useTheme.ts
+        src/hooks/useScroll.ts
+        src/hooks/useDebounce.ts
+
+    Core Pages:
+        src/app/page.tsx (Home)
+        src/app/about/page.tsx (About)
+        src/app/projects/page.tsx (Projects Overview)
+        src/app/project/[id]/page.tsx (Project Detail)
+        src/app/contact/page.tsx (Contact)
+        src/app/api/contact/route.ts (API Endpoint)
+
+    Reusable Components:
+    Build components in src/components/common/ and src/components/ui/.
+
+    Advanced Features:
+    Integrate Framer Motion, responsive design, and accessibility improvements.
+
+    Testing:
+    Create tests in tests/.
+
+    CI/CD:
+    Configure .github/workflows/ci.yml.
+
+    Final Polish & Documentation:
+        Update README and deploy.
