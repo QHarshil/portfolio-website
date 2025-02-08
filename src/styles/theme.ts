@@ -17,9 +17,6 @@
  * Integration:
  * - This theme object can be used with CSS-in-JS libraries (such as styled-components or Emotion)
  *   or to extend Tailwind CSS configurations.
- *
- * Author: [Your Name]
- * Date: [Today's Date]
  */
 
 export const theme = {

@@ -16,9 +16,6 @@
   - Including a comprehensive CSS reset to ensure a consistent baseline across different browsers.
   - Adding media queries to support dark mode automatically based on user system preferences.
   - Modular approach: all global definitions are centralized here for maintainability and scalability.
-  
-  Author: [Your Name]
-  Date: [Today's Date]
 */
 
 /* -----------------------------------------------------------------------------

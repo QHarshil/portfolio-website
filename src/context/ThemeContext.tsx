@@ -16,9 +16,6 @@
  * Usage:
  * - Wrap your application's root component with <ThemeProvider> to enable global theming.
  * - Use the custom hook `useTheme()` in any component to access the current theme and toggle functionality.
- *
- * Author: [Your Name]
- * Date: [Today's Date]
  */
 
 import React, { createContext, useContext, useEffect, useState } from "react";
