@@ -1,3 +1,4 @@
+"use client";
 /**
  * useWindowSize.ts
  * ----------------

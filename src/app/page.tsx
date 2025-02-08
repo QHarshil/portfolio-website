@@ -1,101 +1,235 @@
-import Image from "next/image";
+// src/app/page.tsx
+"use client";
 
-export default function Home() {
+/**
+ * Home Page
+ * =========
+ *
+ * This file defines the Home Page of the portfolio application using the Next.js App Router.
+ * It demonstrates advanced frontend skills with a modular design, responsive layouts, and
+ * polished animations using Framer Motion.
+ *
+ * The page is divided into three main sections:
+ *  1. HeroSection: Introduces Harshil Chudasama, displays a professional headline (subheader),
+ *     and highlights key expertise in a refined summary.
+ *  2. SkillsSection: Displays key skill areas including scalable systems, cloud automation,
+ *     AI/ML, computer vision, and both frontend & backend development.
+ *  3. CTASection: Provides clear calls-to-action to explore projects and get in touch.
+ *
+ * The implementation uses Tailwind CSS for styling and Framer Motion for smooth, modern animations.
+ *
+ * Author: Harshil Chudasama (adapted by [Your Name])
+ * Date: [Today's Date]
+ */
+
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+/**
+ * Animation Variants for Consistent Motion Effects
+ */
+const heroVariants = {
+  hidden: { opacity: 0, y: -50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+};
+
+const fadeInVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { delay: 0.3, duration: 0.8 } },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.2 } },
+};
+
+/**
+ * HeroSection Component
+ * -----------------------
+ * Renders the main hero section with:
+ * - A large, bold heading displaying the name.
+ * - A subheading (professional headline) styled similarly to LinkedIn.
+ * - A refined, multi-line summary that clearly outlines expertise.
+ * - Animated call-to-action buttons.
+ */
+const HeroSection: React.FC = () => {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <section
+      className="flex flex-col items-center justify-center min-h-screen 
+                 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 
+                 dark:from-indigo-800 dark:via-purple-800 dark:to-pink-800 px-4"
+    >
+      {/* Animated Main Heading */}
+      <motion.h1
+        className="text-5xl md:text-7xl font-extrabold mb-2 text-center"
+        initial="hidden"
+        animate="visible"
+        variants={heroVariants}
+      >
+        Harshil Chudasama
+      </motion.h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Animated Subheading (Professional Headline) */}
+      <motion.h2
+        className="text-xl md:text-2xl italic text-gray-700 dark:text-gray-300 mb-4 text-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.8 } }}
+      >
+        Software Engineer | AI/ML, Cloud & Data Specialist
+      </motion.h2>
+
+      {/* Animated Summary */}
+      <motion.div
+        className="text-center max-w-2xl leading-relaxed mb-8"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+      >
+        <p>Experienced Software Engineer with a Master’s in Computer Science.</p>
+        <p className="mt-2">
+          Expert in designing scalable, fault-tolerant systems and high-performance data pipelines.
+        </p>
+        <p className="mt-2">
+          Proven ability to build robust backend systems, engaging frontend interfaces, and cloud-native applications.
+        </p>
+        <p className="mt-2">
+          Passionate about leveraging AI/ML and computer vision to drive innovative solutions.
+        </p>
+      </motion.div>
+
+      {/* Animated Call-to-Action Buttons */}
+      <motion.div
+        className="flex flex-col sm:flex-row gap-6"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants}
+      >
+        <Link
+          href="/projects"
+          className="px-8 py-3 bg-primary text-white rounded-lg shadow hover:bg-primaryLight transition-colors"
+        >
+          View Projects
+        </Link>
+        <Link
+          href="/contact"
+          className="px-8 py-3 border border-primary text-primary rounded-lg hover:bg-primary transition-colors"
+        >
+          Contact Me
+        </Link>
+      </motion.div>
+    </section>
+  );
+};
+
+/**
+ * SkillsSection Component
+ * -------------------------
+ * Highlights key skills and areas of expertise through a responsive grid of cards.
+ * Each card represents a core competency.
+ */
+const SkillsSection: React.FC = () => {
+  const skills = [
+    "Scalable & Fault-Tolerant Systems",
+    "High-Performance Data Pipelines",
+    "Backend Development",
+    "Frontend Development",
+    "Cloud Automation & Infrastructure",
+    "Kubernetes & Docker",
+    "DevOps & CI/CD",
+    "AI/ML & Computer Vision",
+  ];
+
+  return (
+    <section className="py-16 bg-gray-50 dark:bg-gray-800">
+      <div className="container mx-auto px-4">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold text-center mb-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInVariants}
+        >
+          Key Skills & Expertise
+        </motion.h2>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          {skills.map((skill, index) => (
+            <motion.div
+              key={index}
+              className="p-6 bg-white dark:bg-gray-700 rounded-lg shadow-md"
+              variants={fadeInVariants}
+            >
+              <p className="text-xl font-medium text-gray-800 dark:text-gray-200">
+                {skill}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+/**
+ * CTASection Component
+ * ----------------------
+ * Provides a call-to-action for the visitor to explore the portfolio further.
+ * Includes animated headings and buttons to guide users to the Projects and Contact pages.
+ */
+const CTASection: React.FC = () => {
+  return (
+    <section className="py-16 bg-gradient-to-r from-indigo-200 to-purple-200 dark:from-indigo-700 dark:to-purple-700">
+      <div className="container mx-auto px-4 text-center">
+        <motion.h2
+          className="text-3xl md:text-4xl font-bold mb-4"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          Explore My Work
+        </motion.h2>
+        <motion.div
+          className="flex flex-col sm:flex-row justify-center gap-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+          <Link
+            href="/projects"
+            className="px-6 py-3 bg-primary text-white rounded-lg shadow hover:bg-primaryLight transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            View Projects
+          </Link>
+          <Link
+            href="/contact"
+            className="px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary transition-colors"
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            Get In Touch
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+/**
+ * HomePage Component
+ * -------------------
+ * The main export for the Home Page, assembling all sections together.
+ * Structured to be easily extended with additional components such as testimonials or featured projects.
+ */
+export default function HomePage() {
+  return (
+    <main className="min-h-screen">
+      <HeroSection />
+      <SkillsSection />
+      <CTASection />
+    </main>
   );
 }

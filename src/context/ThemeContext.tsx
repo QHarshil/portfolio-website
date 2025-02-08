@@ -1,4 +1,7 @@
 // src/context/ThemeContext.tsx
+
+"use client";
+
 /**
  * ThemeContext
  * ------------

@@ -1,3 +1,4 @@
+"use client";
 /**
  * useScroll.ts
  * ------------

@@ -33,6 +33,8 @@
 import type { Metadata } from "next";
 import React from "react";
 
+import Link from "next/link";
+
 // Import optimized Google Fonts via Next.js for performance and consistency
 import { Geist, Geist_Mono } from "next/font/google";
 
