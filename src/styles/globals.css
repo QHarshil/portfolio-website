@@ -1,76 +1,16 @@
-/* 
-  src/styles/globals.css
-  ======================
-  
-  Global CSS for the Portfolio Website
-  
-  Purpose:
-  - Import Tailwind CSS base styles, component classes, and utility classes.
-  - Define custom CSS variables for theming (light/dark mode), typography, spacing, and color tokens.
-  - Apply global resets and default styles for consistent rendering across browsers.
-  - Establish foundational accessibility and responsive design enhancements.
-  
-  Design Considerations:
-  - Leveraging Tailwind CSS for rapid, responsive, and utility-first styling.
-  - Using CSS Custom Properties to allow dynamic theming and easy future updates.
-  - Including a comprehensive CSS reset to ensure a consistent baseline across different browsers.
-  - Adding media queries to support dark mode automatically based on user system preferences.
-  - Modular approach: all global definitions are centralized here for maintainability and scalability.
-*/
+/* src/styles/globals.css */
 
 /* -----------------------------------------------------------------------------
    Tailwind CSS Directives
-   -----------------------------------------------------------------------------
-   These directives import Tailwind's base, component, and utility styles.
 ----------------------------------------------------------------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* -----------------------------------------------------------------------------
-   CSS Custom Properties (Design Tokens)
-   -----------------------------------------------------------------------------
-   Define global variables for colors, fonts, spacing, and other design tokens.
-   These tokens ensure consistency throughout the application and support easy
-   updates and theming (e.g., for dark/light modes).
+   CSS Reset & Box-Sizing
 ----------------------------------------------------------------------------- */
-:root {
-  /* Color Tokens */
-  --color-background: #ffffff;
-  --color-foreground: #171717;
-  --color-primary: #0070f3;
-  --color-secondary: #ff4081;
-
-  /* Typography */
-  --font-body: 'Arial', sans-serif;
-  --font-heading: 'Helvetica Neue', sans-serif;
-
-  /* Spacing & Sizing */
-  --space-base: 1rem; /* Base spacing unit */
-  --border-radius: 0.375rem; /* 6px rounded corners */
-}
-
-/* -----------------------------------------------------------------------------
-   Dark Mode Support
-   -----------------------------------------------------------------------------
-   Adjust the CSS variables when the user’s system indicates a preference for dark mode.
------------------------------------------------------------------------------ */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #0a0a0a;
-    --color-foreground: #ededed;
-    --color-primary: #79b8ff;
-    --color-secondary: #ff79c6;
-  }
-}
-
-/* -----------------------------------------------------------------------------
-   Global Reset & Base Styling
-   -----------------------------------------------------------------------------
-   Apply a comprehensive CSS reset to ensure consistency across browsers,
-   then define base styles for common HTML elements.
------------------------------------------------------------------------------ */
-/* CSS Reset: Remove default margins, paddings, and borders */
+/* A modern CSS reset to ensure consistency across browsers */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -92,21 +32,26 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* Set base line-height and default font for body */
-body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-body);
-  line-height: 1.6;
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 /* -----------------------------------------------------------------------------
-   Default Element Styles & Utility Classes
-   -----------------------------------------------------------------------------
-   Provide default styles for common elements to ensure accessibility and consistency.
+   Base Styles
 ----------------------------------------------------------------------------- */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-/* Anchor tags */
 a {
   color: var(--color-primary);
   text-decoration: none;
@@ -118,28 +63,68 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Responsive container utility */
 .container {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--space-base);
-  padding-right: var(--space-base);
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
-/* Ensure images are responsive */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* -----------------------------------------------------------------------------
-   Accessibility Enhancements
-   -----------------------------------------------------------------------------
-   Define focus styles to ensure interactive elements are clearly visible 
-   for keyboard users.
------------------------------------------------------------------------------ */
 :focus {
   outline: 2px dashed var(--color-primary);
   outline-offset: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+   CSS Custom Properties (Design Tokens)
+----------------------------------------------------------------------------- */
+
+/* Light Mode: Futuristic Minimalism */
+:root {
+  /* Colors */
+  --color-background: #F9F9F9;       /* Off-White Background */
+  --color-panel: #EAEAEA;            /* Soft Gray for Panels */
+  --color-card: #FFFFFF;             /* Clean White for Cards */
+  --color-foreground: #1C1C1E;       /* Deep Dark Text */
+  --color-primary: #007BFF;          /* Vivid Blue for CTAs */
+  --color-secondary: #FFC107;        /* Warm Gold for Accents */
+  --color-tertiary: #5A189A;         /* Muted Purple for Secondary Highlights */
+  --color-accent: #5856D6;           /* Cool Violet-Blue Accent */
+  --color-interactive: #0A84FF;      /* Interactive Blue for hover states */
+  
+  /* Overlays & Borders */
+  --color-overlay: rgba(255, 255, 255, 0.8);
+  --color-border: #D1D1D6;
+  
+  /* Typography */
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  
+  /* Spacing & Sizing */
+  --space-base: 1rem;
+  --border-radius: 0.5rem;
+}
+
+/* Dark Mode: Sleek Futurism */
+.dark {
+  /* Colors */
+  --color-background: #1C1C1E;       /* Deep Dark Background */
+  --color-panel: #2C2C2E;            /* Charcoal Gray Panels */
+  --color-card: #262629;             /* Very Dark Gray for Cards */
+  --color-foreground: #F2F2F7;       /* Soft Off-White Text */
+  --color-primary: #0A84FF;          /* Bright Blue for CTAs */
+  --color-secondary: #FF9F0A;        /* Muted Orange for Accents */
+  --color-tertiary: #7E57C2;         /* Deep Purple for Secondary Highlights */
+  --color-accent: #5856D6;           /* Consistent Violet-Blue Accent */
+  --color-interactive: #5AC8FA;      /* Lighter Interactive Blue */
+  
+  /* Overlays & Borders */
+  --color-overlay: rgba(0, 0, 0, 0.8);
+  --color-border: #3A3A3C;
 }

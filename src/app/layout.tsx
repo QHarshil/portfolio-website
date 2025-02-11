@@ -1,70 +1,30 @@
 // src/app/layout.tsx
-/**
- * RootLayout Component
- * ======================
- * 
- * This component defines the global layout for the portfolio application using the Next.js App Router.
- * It performs the following key tasks:
- * 
- * 1. **Global CSS & Font Setup:**
- *    - Imports global styles from `globals.css` (including Tailwind CSS directives and resets).
- *    - Uses Next.js's built-in font optimization via `next/font/google` to load and apply custom fonts.
- * 
- * 2. **SEO & Metadata:**
- *    - Sets up metadata (title, description, Open Graph data) based on Harshil Chudasama's resume.
- *      The metadata emphasizes expertise in scalable systems, cloud automation, machine learning,
- *      and a broad range of software engineering skills relevant to backend, frontend, and full-stack roles.
- * 
- * 3. **Theming & State Management:**
- *    - Wraps the entire application in the `ThemeProvider` to enable dark/light mode across pages.
- * 
- * 4. **HTML Structure:**
- *    - Establishes the base HTML structure with language settings and applies font variables.
- * 
- * Design Decisions:
- * - SEO metadata is tailored to showcase a well-rounded Software Development Engineer.
- * - Global styles and font configurations ensure a consistent, modern look and feel.
- * - The modular structure allows for future enhancements (e.g., additional analytics, more complex layouts).
- *
- * Author: Harshil Chudasama
- * Date: Februrary 7, 2025
- */
-
-import type { Metadata } from "next";
-import React from "react";
-
-import Link from "next/link";
-
-// Import optimized Google Fonts via Next.js for performance and consistency
-import { Geist, Geist_Mono } from "next/font/google";
-
-// Import global CSS (includes Tailwind CSS directives, resets, and custom properties)
-import "../styles/globals.css";
-
-// Import the ThemeProvider to enable global dark/light mode management
+import "../styles/globals.css"; // Global CSS: resets, Tailwind directives, and custom properties
 import { ThemeProvider } from "../context/ThemeContext";
+import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
 
-// Initialize Google Fonts and assign them to CSS custom properties
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Initialize Google Fonts and assign them to custom CSS variables.
+// You can adjust the fonts and their fallback values as needed.
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+});
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-// Define metadata for SEO, social sharing, and browser configuration based on resume details
+// Define metadata for SEO, Open Graph, and other purposes.
 export const metadata: Metadata = {
-  title: "Harshil Chudasama | Software Development Engineer",
+  title: "Harshil Chudasama | Full-Stack Engineer & Product Leader",
   description:
-    "Harshil Chudasama is a Software Development Engineer with an MSc in Computer Science. Experienced in designing scalable, fault-tolerant systems, distributed computing, and cloud automation using AWS and Kubernetes. Skilled in machine learning, high-performance applications, and optimizing large-scale data pipelines for low-latency, compute-intensive workflows. Open to roles in backend, frontend, or full-stack development.",
+    "Explore the portfolio of Harshil Chudasama, a visionary Full-Stack Engineer and Ex-Product Manager. With expertise in scalable systems, cloud automation, and cross-functional leadership, Harshil delivers innovative digital solutions that push the boundaries of technology.",
   openGraph: {
-    title: "Harshil Chudasama | Software Development Engineer",
+    title: "Harshil Chudasama | Portfolio",
     description:
-      "Discover the portfolio of Harshil Chudasama, a versatile Software Development Engineer with expertise in scalable systems, cloud automation, machine learning, and data pipelines. Explore projects demonstrating high-performance backend, frontend, and full-stack solutions.",
-    url: "https://yourportfolio.com", // Replace with your actual portfolio URL
+      "Discover projects and skills from Harshil Chudasama—a seasoned Full-Stack Engineer and Product Leader with a passion for innovation and technology.",
+    url: "https://yourportfolio.com", // Replace with your actual URL
     siteName: "Harshil Chudasama Portfolio",
     images: [
       {
@@ -77,17 +37,21 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  // You can add more meta tags here if needed.
 };
 
 /**
- * RootLayout
- * 
- * Wraps the entire application with global configurations, including:
- * - HTML language settings and font variables.
- * - The ThemeProvider to manage and persist dark/light mode.
+ * RootLayout Component
+ * ======================
  *
- * @param {React.ReactNode} children - The page content to be rendered.
- * @returns {JSX.Element} The complete HTML structure for the application.
+ * This component wraps the entire application. It:
+ * 1. Imports global CSS and sets up the custom fonts.
+ * 2. Applies SEO and Open Graph metadata.
+ * 3. Wraps the application with the ThemeProvider to manage dark/light mode.
+ * 4. Establishes the base HTML structure with language settings and custom font variables.
+ *
+ * Author: Harshil Chudasama
+ * Date: February 7, 2025
  */
 export default function RootLayout({
   children,
@@ -95,15 +59,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
-        {/* Additional head elements (e.g., favicon links, extra meta tags) can be added here */}
+        {/* Additional head elements, favicon links, and meta tags can be added here */}
       </head>
       <body className="antialiased">
-        {/*
-          Wrap the application with the ThemeProvider to ensure that every component
-          can access and toggle the global dark/light theme.
-        */}
+        {/* Wrap the entire app with ThemeProvider for centralized theming */}
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
