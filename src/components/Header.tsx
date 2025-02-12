@@ -6,14 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 
-// Define navigation items (excluding Projects, which gets a dropdown)
+// Navigation items for main links (excluding Projects)
 const navItems = [
   { name: "Home", path: "/" },
   { name: "CV", path: "/cv" },
   { name: "Contact", path: "/contact" },
 ];
 
-// Define the individual project links for the Projects dropdown.
+// Dropdown items for the Projects menu
 const projectDropdownItems = [
   { name: "All Projects", path: "/projects" },
   { name: "High‑Frequency Trading", path: "/projects/trading" },
@@ -38,9 +38,9 @@ const navItemVariant = {
  * Header Component
  * ----------------
  * A modern, futuristic header with:
- * - A branding section that links to home.
+ * - Branding that links to the home page.
  * - A desktop navigation menu that includes a Projects dropdown.
- * - A responsive mobile menu using a hamburger icon.
+ * - A responsive mobile menu with a hamburger icon.
  * - A dark/light mode toggle.
  */
 const Header: React.FC = () => {
@@ -48,10 +48,9 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isProjectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
 
-  // Toggle the mobile menu open/close state.
+  // Toggle mobile menu state
   const handleMobileMenuToggle = () => setMobileMenuOpen((prev) => !prev);
-
-  // Toggle the Projects dropdown open/close state.
+  // Toggle Projects dropdown state
   const handleProjectsToggle = () => setProjectsDropdownOpen((prev) => !prev);
 
   return (
@@ -79,7 +78,6 @@ const Header: React.FC = () => {
               </Link>
             </motion.div>
           ))}
-
           {/* Projects Dropdown */}
           <motion.div
             className="relative"
@@ -104,9 +102,9 @@ const Header: React.FC = () => {
                 >
                   {projectDropdownItems.map((proj) => (
                     <Link key={proj.name} href={proj.path}>
-                      <a className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <div className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                         {proj.name}
-                      </a>
+                      </div>
                     </Link>
                   ))}
                 </motion.div>
@@ -148,15 +146,17 @@ const Header: React.FC = () => {
             {navItems.map((item) => (
               <li
                 key={item.name}
-                className="text-center text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-[var(--color-primary)] transition-colors"
+                className="text-center text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-[var(--primary)] transition-colors"
               >
-                <Link href={item.path}>{item.name}</Link>
+                <Link href={item.path}>
+                  <span>{item.name}</span>
+                </Link>
               </li>
             ))}
             <li className="relative text-center">
               <button
                 onClick={handleProjectsToggle}
-                className="text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-[var(--color-primary)] transition-colors"
+                className="text-lg font-medium text-gray-900 dark:text-gray-100 hover:text-[var(--primary)] transition-colors"
               >
                 Projects
               </button>
@@ -170,9 +170,9 @@ const Header: React.FC = () => {
                   >
                     {projectDropdownItems.map((proj) => (
                       <Link key={proj.name} href={proj.path}>
-                        <a className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <div className="block px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer">
                           {proj.name}
-                        </a>
+                        </div>
                       </Link>
                     ))}
                   </motion.div>

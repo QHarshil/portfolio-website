@@ -1,56 +1,56 @@
 // app/api/projects/route.ts
 import { NextResponse } from "next/server";
 
-// Sample summarized project data
+// Updated sample summarized project data
 const projectsSummary = [
   {
     id: "trading",
     title: "High‑Frequency Algorithmic Trading Engine for IMC Trading Propserity 2",
-    techStack: "Python, Pandas, NumPy, SciPy, Matplotlib",
+    technologies: ["Python", "Pandas", "NumPy", "SciPy", "Matplotlib"],
     summary:
-      "A high-frequency trading engine leveraging advanced quantitative techniques and vectorized operations to reduce simulation runtimes by ~40%. Future enhancements include custom C/C++ modules and WebSocket integration.",
+      "Engineered a low‑latency trading system that integrates quantitative finance models and rigorous backtesting to drive profit generation in a real‑time simulated market, achieving top 1% performance.",
   },
   {
     id: "cloud-platform",
     title: "Cloud‑Native Distributed Service Platform for Scalable Applications",
-    techStack: "Node.js (Nest.js), Spring Boot, Docker, Kubernetes, AWS, Terraform, PostgreSQL, Redis",
+    technologies: ["Node.js (Nest.js)", "Spring Boot", "Docker", "Kubernetes", "AWS", "Terraform", "PostgreSQL", "Redis"],
     summary:
-      "A microservices-based platform designed for high transaction volumes with fault tolerance. Containerized services orchestrated via Kubernetes on AWS, with a streamlined CI/CD pipeline.",
+      "Developed a robust microservices architecture that leverages containerization and CI/CD automation to ensure high‑throughput, fault‑tolerant backend transactions in a production‑grade cloud environment.",
   },
   {
     id: "data-pipeline",
     title: "Robust Data Processing Pipeline for Scientific Research",
-    techStack: "Python, Apache Spark, Kafka, PostgreSQL, Docker, Airflow",
+    technologies: ["Python", "Apache Spark", "Kafka", "PostgreSQL", "Docker", "Airflow"],
     summary:
-      "An efficient ETL pipeline for high-volume scientific data streams that reduces manual intervention by ~20% using Apache Spark and Kafka.",
+      "Designed an automated, distributed ETL framework that ingests and transforms high‑volume scientific data with exceptional accuracy and scalability, ensuring data integrity across large datasets.",
   },
   {
     id: "route-optimization",
     title: "Scalable Route Optimization Simulator for Urban Logistics",
-    techStack: "Python, NetworkX, NumPy, SciPy, concurrent.futures, Matplotlib",
+    technologies: ["Python", "NetworkX", "NumPy", "SciPy", "concurrent.futures", "Matplotlib"],
     summary:
-      "A simulation tool that models urban logistics as a weighted graph, optimizing multi‑stop delivery routes for networks with over 100,000 nodes.",
+      "Created an advanced simulation tool using algorithmic optimizations and parallel processing to compute efficient multi‑stop delivery routes, thereby reducing operational costs in complex urban environments.",
   },
   {
     id: "donor-app",
     title: "Donor Management Application for the BC Cancer Foundation",
-    techStack: "TypeScript, React, Node.js, Express, PostgreSQL, Docker, Socket.IO, AWS, Microservices",
+    technologies: ["TypeScript", "React", "Node.js", "Express", "PostgreSQL", "Docker", "Socket.IO", "AWS", "Microservices"],
     summary:
-      "A full-stack application that automates donor workflows, reduces manual data entry by 40%, and features real-time notifications with containerized microservices.",
+      "Built an end‑to‑end donor management system that streamlines fundraising operations through real‑time data synchronization and high availability, significantly reducing manual processing and errors.",
   },
   {
     id: "facefit",
     title: "FaceFit – AR‑Based Virtual Accessory Try‑On Application",
-    techStack: "Java, Spring Boot, Mediapipe.js, PostgreSQL, React.js",
+    technologies: ["Java", "Spring Boot", "Mediapipe.js", "PostgreSQL", "React.js"],
     summary:
-      "An augmented reality application that enables virtual accessory try-ons by integrating robust computer vision with scalable backend engineering.",
+      "Developed a real‑time augmented reality experience that blends precise facial recognition with dynamic overlay techniques to deliver immersive user interactions and drive engagement.",
   },
   {
     id: "portfolio",
     title: "Personal Portfolio Website & Frontend Showcase",
-    techStack: "React, Next.js, TypeScript, HTML5, CSS3/SCSS, Node.js, Vercel",
+    technologies: ["React", "Next.js", "TypeScript", "HTML5", "CSS3/SCSS", "Node.js", "Vercel"],
     summary:
-      "A digital portfolio showcasing advanced frontend development skills through a modular, component-based architecture optimized for SEO and performance.",
+      "Constructed a high‑performance, responsive portfolio that effectively demonstrates technical projects and professional achievements while embodying modern software design and usability principles.",
   },
 ];
 

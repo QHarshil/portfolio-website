@@ -2,87 +2,70 @@
  * Theme Configuration
  * ====================
  *
- * This file defines the design tokens for our futuristic, minimalistic website.
- * It includes detailed color tokens for both light and dark modes, along with
- * settings for typography, spacing, borders, shadows, transitions, and breakpoints.
- *
- * Light Mode (Futuristic Minimalism):
- *   - Background: Off-White (#F9F9F9)
- *   - Panel: Soft Gray (#EAEAEA)
- *   - Card: Clean White (#FFFFFF)
- *   - Foreground: Deep Dark (#1C1C1E)
- *   - Primary: Vivid Blue (#007BFF)
- *   - Secondary: Warm Gold (#FFC107)
- *   - Tertiary: Muted Purple (#5A189A)
- *   - Accent: Cool Violet-Blue (#5856D6)
- *   - Interactive: Interactive Blue (#0A84FF)
- *   - Overlay: rgba(255, 255, 255, 0.8)
- *   - Border: #D1D1D6
- *
- * Dark Mode (Sleek Futurism):
- *   - Background: Deep Dark (#1C1C1E)
- *   - Panel: Charcoal Gray (#2C2C2E)
- *   - Card: Very Dark Gray (#262629)
- *   - Foreground: Soft Off-White (#F2F2F7)
- *   - Primary: Bright Blue (#0A84FF)
- *   - Secondary: Muted Orange (#FF9F0A)
- *   - Tertiary: Deep Purple (#7E57C2)
- *   - Accent: Consistent Violet-Blue (#5856D6)
- *   - Interactive: Lighter Interactive Blue (#5AC8FA)
- *   - Overlay: rgba(0, 0, 0, 0.8)
- *   - Border: #3A3A3C
- *
- * Typography, spacing, and other design scales are also defined below.
+ * This file defines the design tokens for our futuristic, elegant, and minimalistic website.
+ * It leverages CSS custom properties defined in our global CSS (via @layer base)
+ * to provide dynamic, responsive theming for both light and dark modes.
  *
  * Author: Harshil Chudasama
- * Date: [Current Date]
  */
 
-export const theme = {
+const theme = {
   colors: {
     light: {
-      background: "#F9F9F9",      // Off-White Background
-      panel: "#EAEAEA",           // Soft Gray Panels
-      card: "#FFFFFF",            // Clean White Cards
-      foreground: "#1C1C1E",      // Deep Dark Text
-      primary: "#007BFF",         // Vivid Blue for CTAs
-      secondary: "#FFC107",       // Warm Gold for accents
-      tertiary: "#5A189A",        // Muted Purple for secondary highlights
-      accent: "#5856D6",          // Cool Violet-Blue Accent
-      interactive: "#0A84FF",     // Interactive Blue for hover states
-      overlay: "rgba(255, 255, 255, 0.8)",
-      border: "#D1D1D6",
+      background: "hsl(var(--background))",               // Light Sand with soft pinkish hue
+      foreground: "hsl(var(--foreground))",               // Deep dark text
+      card: "hsl(var(--card))",                             // Egyptian Papyrus for cards
+      cardForeground: "hsl(var(--card-foreground))",
+      popover: "hsl(var(--popover))",
+      popoverForeground: "hsl(var(--popover-foreground))",
+      primary: "hsl(var(--primary))",                       // Desert Gold accent
+      primaryForeground: "hsl(var(--primary-foreground))",
+      secondary: "hsl(var(--secondary))",                   // Pharaoh's Gold accent
+      secondaryForeground: "hsl(var(--secondary-foreground))",
+      accent: "hsl(var(--accent))",                         // Burnt Umber accent
+      accentForeground: "hsl(var(--accent-foreground))",
+      destructive: "hsl(var(--destructive))",               // Strong red for destructive actions
+      destructiveForeground: "hsl(var(--destructive-foreground))",
+      border: "hsl(var(--border))",                         // Antique Bronze border
+      input: "hsl(var(--input))",
+      ring: "hsl(var(--ring))",
     },
     dark: {
-      background: "#1C1C1E",      // Deep Dark Background
-      panel: "#2C2C2E",           // Charcoal Gray Panels
-      card: "#262629",            // Very Dark Gray for Cards
-      foreground: "#F2F2F7",      // Soft Off-White Text
-      primary: "#0A84FF",         // Bright Blue for CTAs
-      secondary: "#FF9F0A",       // Muted Orange for accents
-      tertiary: "#7E57C2",        // Deep Purple for secondary highlights
-      accent: "#5856D6",          // Consistent Violet-Blue Accent
-      interactive: "#5AC8FA",     // Lighter Interactive Blue for hover states
-      overlay: "rgba(0, 0, 0, 0.8)",
-      border: "#3A3A3C",
+      background: "hsl(var(--background))",               // Deep, warm charcoal
+      foreground: "hsl(var(--foreground))",               // Light Sand text
+      card: "hsl(var(--card))",                             // Dark cards slightly lighter than background
+      cardForeground: "hsl(var(--card-foreground))",
+      popover: "hsl(var(--popover))",
+      popoverForeground: "hsl(var(--popover-foreground))",
+      primary: "hsl(var(--primary))",                       // Pharaoh's Gold for CTAs
+      primaryForeground: "hsl(var(--primary-foreground))",
+      secondary: "hsl(var(--secondary))",                   // Royal Blue for dark mode accents
+      secondaryForeground: "hsl(var(--secondary-foreground))",
+      accent: "hsl(var(--accent))",                         // Burnt Umber accent remains
+      accentForeground: "hsl(var(--accent-foreground))",
+      destructive: "hsl(var(--destructive))",
+      destructiveForeground: "hsl(var(--destructive-foreground))",
+      border: "hsl(var(--border))",                         // Lighter Antique Bronze for separation
+      input: "hsl(var(--input))",
+      ring: "hsl(var(--ring))",
     },
   },
   typography: {
     fonts: {
-      body: "'Inter', sans-serif",
-      heading: "'Space Grotesk', sans-serif",
+      body: "'Lora', 'Poppins', sans-serif",
+      heading: "'Playfair Display', 'Garamond', 'EB Garamond', 'Merriweather', serif",
       monospace: "'Fira Code', monospace",
     },
     sizes: {
-      xs: "0.75rem",    // 12px
-      sm: "0.875rem",   // 14px
-      base: "1rem",     // 16px
-      lg: "1.125rem",   // 18px
-      xl: "1.25rem",    // 20px
-      "2xl": "1.5rem",  // 24px
-      "3xl": "1.875rem",// 30px
-      "4xl": "2.25rem", // 36px
-      "5xl": "3rem",    // 48px
+      xs: "0.75rem",
+      sm: "0.875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
     },
     weights: {
       normal: 400,
@@ -96,13 +79,13 @@ export const theme = {
     },
   },
   spacing: {
-    xs: "0.25rem",    // 4px
-    sm: "0.5rem",     // 8px
-    md: "1rem",       // 16px
-    lg: "1.5rem",     // 24px
-    xl: "2rem",       // 32px
-    "2xl": "3rem",    // 48px
-    "3xl": "4rem",    // 64px
+    xs: "0.25rem",
+    sm: "0.5rem",
+    md: "1rem",
+    lg: "1.5rem",
+    xl: "2rem",
+    "2xl": "3rem",
+    "3xl": "4rem",
   },
   breakpoints: {
     mobile: "640px",

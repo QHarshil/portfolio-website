@@ -41,25 +41,34 @@ html {
 }
 
 /* -----------------------------------------------------------------------------
+   Keyframes & Animations
+----------------------------------------------------------------------------- */
+@keyframes fadeInBackground {
+  from { background-color: transparent; }
+  to { background-color: hsl(var(--background)); }
+}
+
+/* -----------------------------------------------------------------------------
    Base Styles
 ----------------------------------------------------------------------------- */
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
   font-family: var(--font-body, 'Inter', sans-serif);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  animation: fadeInBackground 1s ease-out forwards;
 }
 
 a {
-  color: var(--color-primary);
+  color: hsl(var(--primary));
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: var(--color-secondary);
+  color: hsl(var(--secondary));
   text-decoration: underline;
 }
 
@@ -77,54 +86,110 @@ img {
 }
 
 :focus {
-  outline: 2px dashed var(--color-primary);
+  outline: 2px dashed hsl(var(--primary));
   outline-offset: 2px;
 }
 
 /* -----------------------------------------------------------------------------
    CSS Custom Properties (Design Tokens)
 ----------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    /* Light Mode: Elegant Minimalism (Inspired by Ancient Egypt & Luxury) */
+    --background: 48, 100%, 97%;             /* Soft, warm cream (e.g., #FFF8E6) */
+    --foreground: 0, 0%, 20%;                /* Dark grey text */
+    
+    --card: 48, 100%, 93%;                  /* Slightly darker cream for cards */
+    --card-foreground: 0, 0%, 20%;
+    
+    --popover: 48, 100%, 93%;               /* Same as card */
+    --popover-foreground: 0, 0%, 20%;
+    
+    --primary: 45, 80%, 55%;                /* Warm gold accent (e.g., #C19A6B) */
+    --primary-foreground: 0, 0%, 100%;        /* White text on primary elements */
+    
+    --secondary: 5, 80%, 75%;                /* Soft blush accent */
+    --secondary-foreground: 0, 0%, 10%;       /* Nearly black text */
+    
+    --accent: 204, 100%, 50%;                /* Bright blue accent */
+    --accent-foreground: 0, 0%, 100%;
+    
+    --destructive: 0, 80%, 50%;              /* Strong red for destructive actions */
+    --destructive-foreground: 0, 0%, 100%;
+    
+    --border: 48, 100%, 90%;                /* Soft light border */
+    --input: 48, 100%, 90%;
+    --ring: 30, 70%, 45%;
+    
+    --radius: 0.75rem;
+    
+    /* Typography */
+    --font-body: 'Lora', 'Poppins', sans-serif;
+    --font-heading: 'Playfair Display', 'Garamond', 'EB Garamond', 'Merriweather', serif;
+    --font-monospace: 'Fira Code', monospace;
+  }
 
-/* Light Mode: Futuristic Minimalism */
-:root {
-  /* Colors */
-  --color-background: #F9F9F9;       /* Off-White Background */
-  --color-panel: #EAEAEA;            /* Soft Gray for Panels */
-  --color-card: #FFFFFF;             /* Clean White for Cards */
-  --color-foreground: #1C1C1E;       /* Deep Dark Text */
-  --color-primary: #007BFF;          /* Vivid Blue for CTAs */
-  --color-secondary: #FFC107;        /* Warm Gold for Accents */
-  --color-tertiary: #5A189A;         /* Muted Purple for Secondary Highlights */
-  --color-accent: #5856D6;           /* Cool Violet-Blue Accent */
-  --color-interactive: #0A84FF;      /* Interactive Blue for hover states */
-  
-  /* Overlays & Borders */
-  --color-overlay: rgba(255, 255, 255, 0.8);
-  --color-border: #D1D1D6;
-  
-  /* Typography */
-  --font-body: 'Inter', sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
-  
-  /* Spacing & Sizing */
-  --space-base: 1rem;
-  --border-radius: 0.5rem;
+  .dark {
+    /* Dark Mode: Elegant Minimalism with Warm Undertones */
+    --background: 0, 0%, 15%;               /* Deep, warm dark grey */
+    --foreground: 0, 0%, 90%;               /* Nearly white text */
+    
+    --card: 0, 0%, 20%;                    /* Dark cards with subtle contrast */
+    --card-foreground: 0, 0%, 90%;
+    
+    --popover: 0, 0%, 20%;
+    --popover-foreground: 0, 0%, 90%;
+    
+    --primary: 45, 80%, 65%;                /* Brighter warm gold for CTAs */
+    --primary-foreground: 0, 0%, 100%;
+    
+    --secondary: 5, 80%, 85%;                /* Brighter soft blush for dark mode */
+    --secondary-foreground: 0, 0%, 100%;
+    
+    --accent: 204, 100%, 60%;                /* Lighter bright blue for dark mode */
+    --accent-foreground: 0, 0%, 100%;
+    
+    --destructive: 0, 80%, 50%;
+    --destructive-foreground: 0, 0%, 100%;
+    
+    --border: 0, 0%, 30%;                   /* Darker border for dark mode */
+    --input: 0, 0%, 30%;
+    --ring: 30, 70%, 45%;
+  }
+
+  /* Utility class for border color using our token */
+  .border-border {
+    border-color: hsl(var(--border));
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
-/* Dark Mode: Sleek Futurism */
-.dark {
-  /* Colors */
-  --color-background: #1C1C1E;       /* Deep Dark Background */
-  --color-panel: #2C2C2E;            /* Charcoal Gray Panels */
-  --color-card: #262629;             /* Very Dark Gray for Cards */
-  --color-foreground: #F2F2F7;       /* Soft Off-White Text */
-  --color-primary: #0A84FF;          /* Bright Blue for CTAs */
-  --color-secondary: #FF9F0A;        /* Muted Orange for Accents */
-  --color-tertiary: #7E57C2;         /* Deep Purple for Secondary Highlights */
-  --color-accent: #5856D6;           /* Consistent Violet-Blue Accent */
-  --color-interactive: #5AC8FA;      /* Lighter Interactive Blue */
-  
-  /* Overlays & Borders */
-  --color-overlay: rgba(0, 0, 0, 0.8);
-  --color-border: #3A3A3C;
+/* -----------------------------------------------------------------------------
+   Custom Utility Classes
+----------------------------------------------------------------------------- */
+.glass-effect {
+  @apply bg-background/80 backdrop-blur-lg border border-border/50;
+}
+
+.timeline-item {
+  @apply relative pl-8 pb-8 before:absolute before:left-0 before:top-2 before:h-full before:w-[2px] before:bg-border last:pb-0 last:before:hidden;
+}
+
+.timeline-item::after {
+  content: "";
+  @apply absolute left-[-5px] top-2 h-3 w-3 rounded-full bg-[hsl(var(--primary))];
+}
+
+.skill-bar {
+  @apply h-2 rounded-full bg-muted overflow-hidden relative;
+}
+
+.skill-progress {
+  @apply absolute left-0 top-0 h-full bg-[hsl(var(--primary))] transition-all duration-1000;
 }

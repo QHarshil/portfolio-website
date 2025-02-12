@@ -1,57 +1,80 @@
 import type { Config } from "tailwindcss";
 
-export default {
-  // Enable dark mode using the "dark" class on the root element.
-  darkMode: "class",
-  // Specify the paths to all of your components so Tailwind can tree-shake unused styles.
+const config: Config = {
+  darkMode: ["class"],
   content: [
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      // Extend colors to use your CSS custom properties.
       colors: {
-        background: "var(--color-background)",
-        panel: "var(--color-panel)",
-        card: "var(--color-card)",
-        foreground: "var(--color-foreground)",
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        tertiary: "var(--color-tertiary)",
-        accent: "var(--color-accent)",
-        interactive: "var(--color-interactive)",
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        theme: {
+          gold: "#D4AF37",
+          blue: "#0EA5E9",
+          orange: "#F97316",
+          "dark-800": "#1A1A1A",
+          "dark-700": "#2A2A2A",
+          "dark-600": "#3A3A3A",
+        },
       },
-      // Use custom fonts defined as CSS variables.
-      fontFamily: {
-        body: "var(--font-body, 'Inter', sans-serif)",
-        heading: "var(--font-heading, 'Space Grotesk', sans-serif)",
-        monospace: "var(--font-monospace, 'Fira Code', monospace)",
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      // Extend border radius using a custom property.
-      borderRadius: {
-        DEFAULT: "var(--border-radius)",
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0px" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0px" },
+        },
       },
-      // Optionally extend z-index values (with fallback values)
-      zIndex: {
-        dropdown: "1000", // You can also use: "var(--z-index-dropdown, 1000)"
-        modal: "1100",
-        tooltip: "1200",
-        highest: "9999",
-      },
-      // Extend transition properties if needed
-      transitionProperty: {
-        all: "all",
-      },
-      // Optionally extend shadows based on your design tokens.
-      boxShadow: {
-        xs: "0 1px 2px rgba(0, 0, 0, 0.05)",
-        sm: "0 1px 3px rgba(0, 0, 0, 0.1)",
-        md: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        lg: "0 10px 15px rgba(0, 0, 0, 0.15)",
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [require("tailwindcss-animate")],
+};
+
+export default config;
