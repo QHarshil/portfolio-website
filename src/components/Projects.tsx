@@ -45,14 +45,13 @@ const staggerContainer = {
 ============================================================================= */
 /**
  * Array of Tailwind classes for alternating tech badge colors.
- * You can adjust these classes as needed. Note that we use the
- * arbitrary value syntax with hsl() so that they pick up your CSS tokens.
+ * Cycles every 4 badges.
  */
 const alternatingTechColors = [
-  "bg-[hsl(350, 70%, 80%)] text-[hsl(350, 70%, 20%)]",  // A soft pink
-  "bg-[hsl(45, 80%, 70%)] text-[hsl(45, 80%, 20%)]",    // A warm gold
-  "bg-[hsl(204, 100%, 70%)] text-[hsl(204, 100%, 20%)]", // A light blue
-  "bg-[hsl(5, 80%, 80%)] text-[hsl(5, 80%, 20%)]",       // A soft rose
+  "bg-[hsl(350,70%,80%)] text-[hsl(350,70%,20%)]",  // Soft pink
+  "bg-[hsl(45,80%,70%)] text-[hsl(45,80%,20%)]",    // Warm gold
+  "bg-[hsl(204,100%,70%)] text-[hsl(204,100%,20%)]", // Light blue
+  "bg-[hsl(5,80%,80%)] text-[hsl(5,80%,20%)]",       // Soft rose
 ];
 
 /* =============================================================================
@@ -62,11 +61,12 @@ const alternatingTechColors = [
  * Projects Component
  * --------------------
  * Fetches project data from the API and displays each project as a flashcard.
- * Each flashcard is a clickable square card that includes:
- *   - A title (smaller font size for a refined look).
+ * Each flashcard is a clickable square that includes:
+ *   - A smaller title.
  *   - A concise summary (line-clamped to 4 lines).
  *   - A list of technology badges with alternating colors.
  *   - A prominent "View Project →" button.
+ * Only 6 projects are shown on the homepage.
  */
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -111,17 +111,17 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 bg-[hsl(var(--background))]">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))]">
+        <h2 className="text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))]">
           My Projects
         </h2>
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
         >
-          {projects.map((project, index) => (
+          {projects.slice(0, 6).map((project, index) => (
             <Link key={project.id} href={project.link || "#"} passHref>
               <motion.div
                 custom={index}

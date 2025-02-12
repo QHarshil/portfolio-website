@@ -1,103 +1,12 @@
-/* src/styles/globals.css */
-
-/* -----------------------------------------------------------------------------
-   Tailwind CSS Directives
------------------------------------------------------------------------------ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* -----------------------------------------------------------------------------
-   CSS Reset & Box-Sizing
------------------------------------------------------------------------------ */
-/* A modern CSS reset to ensure consistency across browsers */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-html {
-  box-sizing: border-box;
-}
-
-*, *::before, *::after {
-  box-sizing: inherit;
-}
-
-/* -----------------------------------------------------------------------------
-   Keyframes & Animations
------------------------------------------------------------------------------ */
-@keyframes fadeInBackground {
-  from { background-color: transparent; }
-  to { background-color: hsl(var(--background)); }
-}
-
-/* -----------------------------------------------------------------------------
-   Base Styles
------------------------------------------------------------------------------ */
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-body, 'Inter', sans-serif);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  animation: fadeInBackground 1s ease-out forwards;
-}
-
-a {
-  color: hsl(var(--primary));
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: hsl(var(--secondary));
-  text-decoration: underline;
-}
-
-.container {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-:focus {
-  outline: 2px dashed hsl(var(--primary));
-  outline-offset: 2px;
-}
-
-/* -----------------------------------------------------------------------------
-   CSS Custom Properties (Design Tokens)
------------------------------------------------------------------------------ */
 @layer base {
   :root {
-    /* Light Mode: Elegant Minimalism (Inspired by Ancient Egypt & Luxury) */
-    --background: 48, 100%, 97%;             /* Soft, warm cream (e.g., #FFF8E6) */
-    --foreground: 0, 0%, 20%;                /* Dark grey text */
+    /* Light Mode: Elegant Warm Minimalism */
+    --background: 48, 100%, 97%;            /* Warm off-white (e.g., #FFF8E6) */
+    --foreground: 0, 0%, 20%;               /* Dark charcoal text */
     
     --card: 48, 100%, 93%;                  /* Slightly darker cream for cards */
     --card-foreground: 0, 0%, 20%;
@@ -106,20 +15,20 @@ img {
     --popover-foreground: 0, 0%, 20%;
     
     --primary: 45, 80%, 55%;                /* Warm gold accent (e.g., #C19A6B) */
-    --primary-foreground: 0, 0%, 100%;        /* White text on primary elements */
+    --primary-foreground: 0, 0%, 100%;       /* White text on primary elements */
     
     --secondary: 5, 80%, 75%;                /* Soft blush accent */
-    --secondary-foreground: 0, 0%, 10%;       /* Nearly black text */
+    --secondary-foreground: 0, 0%, 10%;      /* Nearly black text */
     
-    --accent: 204, 100%, 50%;                /* Bright blue accent */
+    --accent: 200, 50%, 50%;                /* Refined blue accent */
     --accent-foreground: 0, 0%, 100%;
     
-    --destructive: 0, 80%, 50%;              /* Strong red for destructive actions */
+    --destructive: 0, 80%, 50%;             /* Strong red for destructive actions */
     --destructive-foreground: 0, 0%, 100%;
     
-    --border: 48, 100%, 90%;                /* Soft light border */
+    --border: 48, 100%, 90%;                /* Soft light beige border */
     --input: 48, 100%, 90%;
-    --ring: 30, 70%, 45%;
+    --ring: 30, 70%, 45%;                  /* Darker gold ring for focus */
     
     --radius: 0.75rem;
     
@@ -130,31 +39,31 @@ img {
   }
 
   .dark {
-    /* Dark Mode: Elegant Minimalism with Warm Undertones */
-    --background: 0, 0%, 15%;               /* Deep, warm dark grey */
-    --foreground: 0, 0%, 90%;               /* Nearly white text */
+    /* Dark Mode: Futuristic Elegant with Cool Undertones */
+    --background: 220, 10%, 8%;           /* Deep near-black (e.g., #0A0A0B) */
+    --foreground: 0, 0%, 90%;             /* Soft light gray (#E4E7EB) */
     
-    --card: 0, 0%, 20%;                    /* Dark cards with subtle contrast */
+    --card: 220, 10%, 12%;                /* Slightly lighter than background for cards (#121417) */
     --card-foreground: 0, 0%, 90%;
     
-    --popover: 0, 0%, 20%;
+    --popover: 220, 10%, 12%;
     --popover-foreground: 0, 0%, 90%;
     
-    --primary: 45, 80%, 65%;                /* Brighter warm gold for CTAs */
+    --primary: 210, 70%, 50%;             /* Deep cool blue (#4C5FD5) */
     --primary-foreground: 0, 0%, 100%;
     
-    --secondary: 5, 80%, 85%;                /* Brighter soft blush for dark mode */
-    --secondary-foreground: 0, 0%, 100%;
+    --secondary: 30, 70%, 50%;            /* Warm gold accent (#C19A6B) */
+    --secondary-foreground: 0, 0%, 10%;
     
-    --accent: 204, 100%, 60%;                /* Lighter bright blue for dark mode */
+    --accent: 210, 80%, 60%;              /* Lighter cool blue accent */
     --accent-foreground: 0, 0%, 100%;
     
     --destructive: 0, 80%, 50%;
     --destructive-foreground: 0, 0%, 100%;
     
-    --border: 0, 0%, 30%;                   /* Darker border for dark mode */
-    --input: 0, 0%, 30%;
-    --ring: 30, 70%, 45%;
+    --border: 220, 10%, 15%;              /* Subtle dark border */
+    --input: 220, 10%, 15%;
+    --ring: 210, 70%, 55%;
   }
 
   /* Utility class for border color using our token */
@@ -171,25 +80,65 @@ img {
 }
 
 /* -----------------------------------------------------------------------------
-   Custom Utility Classes
+   Base Component Styles & Custom Utilities
 ----------------------------------------------------------------------------- */
-.glass-effect {
-  @apply bg-background/80 backdrop-blur-lg border border-border/50;
+@layer components {
+  .glass-effect {
+    @apply bg-background/80 backdrop-blur-lg border border-border/50;
+  }
+  .timeline-item {
+    @apply relative pl-8 pb-8;
+  }
+  .timeline-item::before {
+    content: "";
+    @apply absolute left-0 top-2 h-full w-[2px] bg-border;
+  }
+  .timeline-item:last-child {
+    @apply pb-0;
+  }
+  .timeline-item:last-child::before {
+    @apply hidden;
+  }
+  .timeline-item::after {
+    content: "";
+    @apply absolute left-[-5px] top-2 h-3 w-3 rounded-full bg-[hsl(var(--primary))];
+  }
+  .skill-bar {
+    @apply h-2 rounded-full bg-muted overflow-hidden relative;
+  }
+  .skill-progress {
+    @apply absolute left-0 top-0 h-full bg-[hsl(var(--primary))] transition-all duration-1000;
+  }
 }
 
-.timeline-item {
-  @apply relative pl-8 pb-8 before:absolute before:left-0 before:top-2 before:h-full before:w-[2px] before:bg-border last:pb-0 last:before:hidden;
-}
-
-.timeline-item::after {
-  content: "";
-  @apply absolute left-[-5px] top-2 h-3 w-3 rounded-full bg-[hsl(var(--primary))];
-}
-
-.skill-bar {
-  @apply h-2 rounded-full bg-muted overflow-hidden relative;
-}
-
-.skill-progress {
-  @apply absolute left-0 top-0 h-full bg-[hsl(var(--primary))] transition-all duration-1000;
+/* -----------------------------------------------------------------------------
+   Global CSS Reset (if needed, can be adjusted further)
+----------------------------------------------------------------------------- */
+@layer base {
+  html, body, div, span, applet, object, iframe,
+  h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+  a, abbr, acronym, address, big, cite, code,
+  del, dfn, em, img, ins, kbd, q, s, samp,
+  small, strike, strong, sub, sup, tt, var,
+  b, u, i, center,
+  dl, dt, dd, ol, ul, li,
+  fieldset, form, label, legend,
+  table, caption, tbody, tfoot, thead, tr, th, td,
+  article, aside, canvas, details, embed,
+  figure, figcaption, footer, header, hgroup,
+  menu, nav, output, ruby, section, summary,
+  time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  html {
+    box-sizing: border-box;
+  }
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
 }
