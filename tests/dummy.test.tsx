@@ -1,3 +1,4 @@
+// dummmy tests to check if the test suite is working
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
