@@ -5,7 +5,6 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 
 // Initialize Google Fonts and assign them to custom CSS variables.
-// You can adjust the fonts and their fallback values as needed.
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Harshil Chudasama | Portfolio",
     description:
-      "Discover projects and skills from Harshil Chudasama—a seasoned Full-Stack Engineer and Product Leader with a passion for innovation and technology.",
+      "Discover projects and skills from Harshil Chudasama — a seasoned Full-Stack Engineer and Product Leader with a passion for innovation and technology.",
     url: "https://yourportfolio.com", // Replace with your actual URL
     siteName: "Harshil Chudasama Portfolio",
     images: [
@@ -37,34 +36,29 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  // You can add more meta tags here if needed.
+  // Additional meta tags can be added here.
 };
 
 /**
  * RootLayout Component
  * ======================
  *
- * This component wraps the entire application. It:
- * 1. Imports global CSS and sets up the custom fonts.
- * 2. Applies SEO and Open Graph metadata.
- * 3. Wraps the application with the ThemeProvider to manage dark/light mode.
- * 4. Establishes the base HTML structure with language settings and custom font variables.
+ * Wraps the entire application with global configurations:
+ * - Global CSS is imported for resets, utilities, and custom properties.
+ * - Custom fonts are initialized and set as CSS variables.
+ * - SEO and Open Graph metadata are defined.
+ * - The entire app is wrapped in a ThemeProvider for centralized dark/light mode management.
  *
  * Author: Harshil Chudasama
  * Date: February 7, 2025
  */
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
-        {/* Additional head elements, favicon links, and meta tags can be added here */}
+        {/* Additional head elements (favicon, extra meta tags, etc.) can be added here */}
       </head>
       <body className="antialiased">
-        {/* Wrap the entire app with ThemeProvider for centralized theming */}
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

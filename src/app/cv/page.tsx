@@ -1,4 +1,3 @@
-// src/app/cv/page.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -12,10 +11,24 @@ import {
   Code2,
   Briefcase,
   GraduationCap,
+  Cog,
   ExternalLink,
+  Book,
+  Plane,
+  Music,
+  Dumbbell as Boxing,
+  ChefHat,
+  Icon,
 } from "lucide-react";
+import { tennisRacket} from '@lucide/lab';
+import { Badge } from "@/components/ui/badge";
 
-// Define TypeScript interfaces for the API data
+
+const Tennis = (props: { size?: number; className?: string }) => (
+  <Icon iconNode={tennisRacket} {...props} />
+);
+
+// API interfaces
 interface ContactInfo {
   name: string;
   email: string;
@@ -56,6 +69,14 @@ interface Project {
   link?: string;
 }
 
+// Alternating color classes for tech badges (rotating every 4 badges)
+const alternatingTechColors = [
+  "bg-[hsl(350,70%,80%)] text-[hsl(350,70%,20%)]", // Soft pink
+  "bg-[hsl(45,80%,70%)] text-[hsl(45,80%,20%)]",   // Warm gold
+  "bg-[hsl(204,100%,70%)] text-[hsl(204,100%,20%)]",// Light blue
+  "bg-[hsl(5,80%,80%)] text-[hsl(5,80%,20%)]",      // Soft rose
+];
+
 export default function CVPage() {
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [cv, setCv] = useState<CVData | null>(null);
@@ -82,7 +103,7 @@ export default function CVPage() {
 
         setContactInfo(contactData);
         setCv(cvData);
-        // Limit featured projects to 6 for the CV page
+        // Limit featured projects to 6 on the CV page
         setProjects(projectsData.slice(0, 6));
       } catch (err) {
         console.error(err);
@@ -97,7 +118,7 @@ export default function CVPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-xl text-gray-400">Loading CV...</p>
+        <p className="text-xl text-[hsl(var(--foreground))]">Loading CV...</p>
       </div>
     );
   }
@@ -110,61 +131,71 @@ export default function CVPage() {
     );
   }
 
-  // Split the name for styling
-  const [firstName, lastName] = contactInfo.name.split(" ");
+  // Split full name for styling
+  const [firstName, ...rest] = contactInfo.name.split(" ");
+  const lastName = rest.join(" ");
+
+  // Define hobbies for the Hobbies section
+  const hobbies = [
+    { name: "Tennis", icon: Tennis },
+    { name: "Reading", icon: Book },
+    { name: "Travelling", icon: Plane },
+    { name: "Music", icon: Music },
+    { name: "Boxing", icon: Boxing },
+    { name: "Cooking", icon: ChefHat },
+  ];
 
   return (
-    <div className="min-h-screen bg-[#1A1A1A] text-gray-100 selection:bg-[#FFD700] selection:text-black">
-      {/* Fixed header */}
+    <div className="min-h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))] selection:bg-[hsl(var(--primary))] selection:text-[hsl(var(--primary-foreground))]">
+      {/* Fixed Header */}
       <Header />
 
       <div className="container mx-auto px-4 py-12">
-        {/* Top Header Section: Profile, Contact, and Name */}
+        {/* Top Profile Section */}
         <header className="flex flex-col md:flex-row justify-between items-center mb-16">
           <div className="flex items-center gap-6">
             <div className="relative w-24 h-24 md:w-32 md:h-32">
-              <div className="absolute inset-0 bg-[#FFD700] rounded-full opacity-50 blur-md"></div>
+              <div className="absolute inset-0 bg-[hsl(var(--primary))] rounded-full opacity-50 blur-md"></div>
               <Image
-                src="https://yourcdn.com/your_profile_pic.jpg" // Replace with your actual URL
+                src="/profile_pic.jpg"
                 alt={contactInfo.name}
-                width={128}
-                height={128}
+                fill
                 className="rounded-full object-cover relative z-10"
               />
             </div>
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-2">
-                <span className="text-[#FFD700] transition-colors duration-300">
+                <span className="text-[hsl(var(--primary))] transition-colors duration-300">
                   {firstName}
                 </span>{" "}
-                <span className="text-white transition-colors duration-300">
+                <span className="text-[hsl(var(--foreground))] transition-colors duration-300">
                   {lastName}
                 </span>
               </h1>
-              <h2 className="text-xl text-gray-400">Full-Stack Developer</h2>
+              <h2 className="text-xl text-[hsl(var(--muted-foreground))]">Full-Stack Developer</h2>
             </div>
           </div>
           <div className="text-right mt-6 md:mt-0">
             <div className="flex flex-col items-end space-y-2">
               <a
                 href={`tel:${contactInfo.phone}`}
-                className="text-gray-300 hover:text-[#FFD700] transition-colors duration-300"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors duration-300"
               >
                 {contactInfo.phone}
               </a>
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="text-gray-300 hover:text-[#FFD700] transition-colors duration-300"
+                className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-colors duration-300"
               >
                 {contactInfo.email}
               </a>
-              <span className="text-gray-300">Vancouver, BC, Canada</span>
+              <span className="text-[hsl(var(--muted-foreground))]">Vancouver, BC, Canada</span>
               <div className="flex gap-4 mt-2">
                 <a
                   href={contactInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-[#FFD700] transition-transform hover:scale-110 duration-300"
+                  className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-transform hover:scale-110 duration-300"
                 >
                   <Github size={20} />
                 </a>
@@ -172,13 +203,13 @@ export default function CVPage() {
                   href={contactInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-[#FFD700] transition-transform hover:scale-110 duration-300"
+                  className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-transform hover:scale-110 duration-300"
                 >
                   <Linkedin size={20} />
                 </a>
                 <a
                   href="#"
-                  className="text-gray-400 hover:text-[#FFD700] transition-transform hover:scale-110 duration-300"
+                  className="text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--primary))] transition-transform hover:scale-110 duration-300"
                 >
                   <Globe size={20} />
                 </a>
@@ -187,26 +218,32 @@ export default function CVPage() {
           </div>
         </header>
 
-        {/* Summary Section */}
+        {/* Professional Summary Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-[#FFD700]">Professional Summary</h2>
-          <p className="text-gray-200 text-lg leading-relaxed">{cv.summary}</p>
+          <h2 className="flex items-center text-3xl font-bold mb-4 text-[hsl(var(--primary))]">
+            <Code2 className="mr-2" size={24} />
+            Professional Summary
+          </h2>
+          <p className="text-lg leading-relaxed text-[hsl(var(--foreground))]">{cv.summary}</p>
         </section>
 
         {/* Work Experience Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-[#FFD700]">Work Experience</h2>
+          <h2 className="flex items-center text-3xl font-bold mb-4 text-[hsl(var(--primary))]">
+            <Briefcase className="mr-2" size={24} />
+            Work Experience
+          </h2>
           <div className="space-y-8">
             {cv.professionalExperience.map((job, idx) => (
               <div
                 key={idx}
-                className="backdrop-blur-sm bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
+                className="backdrop-blur-sm bg-[hsl(var(--card))] rounded-lg p-6 shadow-md hover:bg-[hsl(var(--card))] transition-all duration-300"
               >
-                <h3 className="text-xl font-semibold text-[#FFD700]">{job.role}</h3>
-                <p className="text-gray-300 mb-2">
+                <h3 className="text-xl font-semibold text-[hsl(var(--primary))]">{job.role}</h3>
+                <p className="mb-2 text-[hsl(var(--muted-foreground))]">
                   {job.company} | {job.location} | {job.dates}
                 </p>
-                <ul className="list-disc list-inside text-gray-400 space-y-1">
+                <ul className="list-disc list-inside text-[hsl(var(--muted-foreground))] space-y-1">
                   {job.responsibilities.map((resp, i) => (
                     <li key={i}>{resp}</li>
                   ))}
@@ -218,21 +255,26 @@ export default function CVPage() {
 
         {/* Education Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-[#FFD700]">Education</h2>
+          <h2 className="flex items-center text-3xl font-bold mb-4 text-[hsl(var(--primary))]">
+            <GraduationCap className="mr-2" size={24} />
+            Education
+          </h2>
           <div className="space-y-8">
             {cv.education.map((edu, idx) => (
               <div
                 key={idx}
-                className="backdrop-blur-sm bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
+                className="backdrop-blur-sm bg-[hsl(var(--card))] rounded-lg p-6 shadow-md hover:bg-[hsl(var(--card))] transition-all duration-300"
               >
-                <h3 className="text-xl font-semibold text-[#FFD700]">{edu.degree}</h3>
-                <p className="text-gray-300 mb-2">
+                <h3 className="text-xl font-semibold text-[hsl(var(--primary))]">{edu.degree}</h3>
+                <p className="mb-2 text-[hsl(var(--muted-foreground))]">
                   {edu.institution} | {edu.dates}
                 </p>
-                {edu.courses && (
+                {edu.coursework && (
                   <>
-                    <p className="text-gray-400 font-semibold mt-2">Relevant Coursework:</p>
-                    <p className="text-gray-400">{edu.courses.join(", ")}</p>
+                    <p className="mt-2 text-[hsl(var(--muted-foreground))] font-semibold">
+                      Relevant Coursework:
+                    </p>
+                    <p className="text-[hsl(var(--muted-foreground))]">{edu.coursework.join(", ")}</p>
                   </>
                 )}
               </div>
@@ -242,26 +284,27 @@ export default function CVPage() {
 
         {/* Skills Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-[#FFD700]">Skills</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <h2 className="flex items-center text-3xl font-bold mb-4 text-[hsl(var(--primary))]">
+            <Cog className="mr-2" size={24} />
+            Skills
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-4">
             {Object.entries(cv.skills).map(([category, skills], idx) => (
               <div
                 key={idx}
-                className="backdrop-blur-sm bg-white/5 rounded-lg p-4 hover:bg-white/10 transition-all duration-300"
+                className="backdrop-blur-sm bg-[hsl(var(--card))] rounded-lg p-4 shadow-md hover:bg-[hsl(var(--card))] transition-all duration-300"
               >
-                <h3 className="text-lg font-bold text-[#FFD700] capitalize mb-2">
+                <h3 className="text-lg font-bold text-[hsl(var(--primary))] capitalize mb-2">
                   {category}
                 </h3>
-                <ul className="text-gray-300 text-sm">
-                  {Array.isArray(skills)
-                    ? skills.map((skill, i) => (
-                        <li key={i} className="mb-1 flex items-center">
-                          <div className="w-1 h-1 bg-[#FFD700] rounded-full mr-2"></div>
-                          {skill}
-                        </li>
-                      ))
-                    : null}
-                </ul>
+                <div className="grid grid-cols-2 gap-2">
+                  {Array.isArray(skills) &&
+                    skills.map((skill, i) => (
+                      <Badge key={i} index={i}>
+                        {skill}
+                      </Badge>
+                    ))}
+                </div>
               </div>
             ))}
           </div>
@@ -269,48 +312,66 @@ export default function CVPage() {
 
         {/* Featured Projects Section */}
         <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-4 text-[#FFD700]">Featured Projects</h2>
+          <h2 className="flex items-center text-3xl font-bold mb-4 text-[hsl(var(--primary))]">
+            <Code2 className="mr-2" size={24} />
+            Featured Projects
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, idx) => (
-              <div
-                key={idx}
-                className="backdrop-blur-sm bg-white/5 rounded-lg p-6 hover:bg-white/10 transition-all duration-300"
+            {projects.map((project) => (
+              <Link
+                key={project.id}
+                href={project.link ? project.link : `/projects/${project.id}`}
+                passHref
               >
-                <h3 className="text-xl font-bold text-[#FFD700] mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-gray-300 mb-4">{project.summary}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.techStack?.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="bg-[#FFD700]/20 text-[#FFD700] text-xs rounded-full px-2 py-1"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <div className="cursor-pointer backdrop-blur-sm bg-[hsl(var(--card))] rounded-lg p-6 shadow-md hover:bg-[hsl(var(--card))] transition-all duration-300">
+                  <h3 className="text-xl font-bold text-[hsl(var(--primary))] mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs text-[hsl(var(--foreground))] mb-4 line-clamp-4">
+                    {project.summary}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies?.map((tech, i) => {
+                      const altColor = alternatingTechColors[i % alternatingTechColors.length];
+                      return (
+                        <Badge
+                          key={i}
+                          className={`px-3 py-1 text-xs rounded-full ${altColor}`}
+                        >
+                          {tech}
+                        </Badge>
+                      );
+                    })}
+                  </div>
+                  <div className="pt-4">
+                    <div className="w-full text-center bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] px-4 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors duration-300">
+                      View Project →
+                    </div>
+                  </div>
                 </div>
-                <Link
-                  href={project.link || "#"}
-                  className="text-[#FFD700] hover:text-white transition-colors duration-300 flex items-center"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Project <ExternalLink size={16} className="ml-1" />
-                </Link>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
 
-        {/* Download CV Button */}
-        <section className="text-center mb-12">
-          <Link
-            href="/api/cv/download"
-            className="inline-block bg-[#FFD700] text-black px-6 py-3 rounded-full hover:bg-white transition-colors duration-300"
-          >
-            Download CV
-          </Link>
+        {/* Hobbies Section */}
+        <section className="mb-12">
+          <h2 className="flex items-center text-3xl font-bold mb-6 text-[hsl(var(--primary))] relative inline-block">
+            <Tennis className="mr-2" size={24} />
+            HOBBIES
+            <div className="absolute bottom-0 left-0 w-full h-px bg-[hsl(var(--primary))]/20" />
+          </h2>
+          <div className="flex flex-wrap gap-4">
+            {hobbies.map((hobby) => (
+              <div
+                key={hobby.name}
+                className="bg-[hsl(var(--card))] rounded-full px-4 py-2 text-sm text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--foreground))] transition-all duration-300 flex items-center gap-2"
+              >
+                <hobby.icon size={16} />
+                {hobby.name}
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </div>

@@ -1,7 +1,6 @@
 // app/api/projects/[id]/route.ts
 import { NextResponse } from "next/server";
 
-// Define a data structure for the full details of each project.
 const projectsFull: Record<string, any> = {
   trading: {
     id: "trading",

@@ -1,3 +1,4 @@
+// src/app/projects/page.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -5,17 +6,13 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
-/**
- * Project Interface
- * -----------------
- * Represents the structure of a project.
- */
+// TypeScript interface for a Project
 export interface Project {
   id: string;
   title: string;
   summary: string;         // Short summary (e.g., 50-100 words)
   technologies?: string[]; // Array of technology names (optional)
-  link?: string;           // URL for the project details (optional)
+  link?: string;           // External URL for project details (optional)
 }
 
 /* =============================================================================
@@ -30,11 +27,6 @@ const cardVariants = {
   }),
 };
 
-const fadeInVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.5, delay: 0.3 } },
-};
-
 const staggerContainer = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.15 } },
@@ -45,7 +37,7 @@ const staggerContainer = {
 ============================================================================= */
 /**
  * Array of Tailwind classes for alternating tech badge colors.
- * Cycles every 4 badges.
+ * Rotates every 4 badges.
  */
 const alternatingTechColors = [
   "bg-[hsl(350,70%,80%)] text-[hsl(350,70%,20%)]",  // Soft pink
@@ -58,17 +50,13 @@ const alternatingTechColors = [
    PROJECTS COMPONENT
 ============================================================================= */
 /**
- * Projects Component
- * --------------------
+ * ProjectsPage Component
+ * ------------------------
  * Fetches project data from the API and displays each project as a flashcard.
- * Each flashcard is a clickable square that includes:
- *   - A smaller title.
- *   - A concise summary (line-clamped to 4 lines).
- *   - A list of technology badges with alternating colors.
- *   - A prominent "View Project →" button.
- * Only 6 projects are shown on the homepage.
+ * Each flashcard is clickable and navigates to either the external link or to
+ * the internal dynamic route `/projects/[id]` for the full project details.
  */
-export default function Projects() {
+export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -121,53 +109,57 @@ export default function Projects() {
           viewport={{ once: true }}
           variants={staggerContainer}
         >
-          {projects.slice(0, 6).map((project, index) => (
-            <Link key={project.id} href={project.link || "#"} passHref>
-              <motion.div
-                custom={index}
-                initial="hidden"
-                animate="visible"
-                variants={cardVariants}
-                className="cursor-pointer"
-              >
-                <div className="aspect-square min-h-[400px] bg-[hsl(var(--card))] rounded-lg overflow-hidden shadow-2xl border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))] transition-all duration-300 transform hover:scale-105 flex flex-col justify-between">
-                  <div className="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="text-xl font-bold mb-2 text-[hsl(var(--primary))]">
-                        {project.title}
-                      </h3>
-                      <p className="text-xs text-[hsl(var(--foreground))] mb-4 line-clamp-4">
-                        {project.summary}
-                      </p>
-                      <div className="mb-4">
-                        <h4 className="text-xs font-semibold mb-2 text-[hsl(var(--primary))]">
-                          Tech Stack:
-                        </h4>
-                        <div className="flex flex-wrap gap-2">
-                          {(project.technologies || []).map((tech, techIndex) => {
-                            const altColor = alternatingTechColors[techIndex % alternatingTechColors.length];
-                            return (
-                              <Badge
-                                key={techIndex}
-                                className={`px-3 py-1 text-xs rounded-full ${altColor}`}
-                              >
-                                {tech}
-                              </Badge>
-                            );
-                          })}
+          {projects.slice(0, 6).map((project, index) => {
+            // Determine the link URL: if project.link exists, use that; otherwise use the dynamic route.
+            const href = project.link ? project.link : `/projects/${project.id}`;
+            return (
+              <Link key={project.id} href={href} passHref>
+                <motion.div
+                  custom={index}
+                  initial="hidden"
+                  animate="visible"
+                  variants={cardVariants}
+                  className="cursor-pointer"
+                >
+                  <div className="aspect-square min-h-[400px] bg-[hsl(var(--card))] rounded-lg overflow-hidden shadow-2xl border border-[hsl(var(--border))] hover:border-[hsl(var(--primary))] transition-all duration-300 transform hover:scale-105 flex flex-col justify-between">
+                    <div className="p-6 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold mb-2 text-[hsl(var(--primary))]">
+                          {project.title}
+                        </h3>
+                        <p className="text-xs text-[hsl(var(--foreground))] mb-4 line-clamp-4">
+                          {project.summary}
+                        </p>
+                        <div className="mb-4">
+                          <h4 className="text-xs font-semibold mb-2 text-[hsl(var(--primary))]">
+                            Tech Stack:
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                            {(project.technologies || []).map((tech, techIndex) => {
+                              const altColor = alternatingTechColors[techIndex % alternatingTechColors.length];
+                              return (
+                                <Badge
+                                  key={techIndex}
+                                  className={`px-3 py-1 text-xs rounded-full ${altColor}`}
+                                >
+                                  {tech}
+                                </Badge>
+                              );
+                            })}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <div className="block bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] px-4 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors duration-300">
-                      View Project →
+                    <div className="p-4">
+                      <div className="w-full text-center bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] px-4 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-colors duration-300">
+                        View Project →
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            </Link>
-          ))}
+                </motion.div>
+              </Link>
+            );
+          })}
         </motion.div>
         <div className="text-center mt-8">
           <Link

@@ -14,13 +14,6 @@ export interface HeroSectionProps {
   };
 }
 
-/**
- * Hero Component
- * --------------
- * A dynamic, futuristic hero section that displays your name, title, a detailed
- * professional summary, a row of contact icons, and an interactive "Get in Touch" button.
- * The section uses a parallax effect on the heading and shows a high-quality profile image.
- */
 export default function Hero({ summary, contact }: HeroSectionProps) {
   const [mounted, setMounted] = useState(false);
   const { scrollY } = useScroll();
@@ -33,7 +26,8 @@ export default function Hero({ summary, contact }: HeroSectionProps) {
   if (!mounted) return null;
 
   const displayName = contact?.name || "Your Name";
-  const displayTitle = contact?.title || "Full-Stack Developer | Ex-Product Manager";
+  const displayTitle =
+    contact?.title || "Full-Stack Developer | Ex-Product Manager";
 
   return (
     <motion.section
@@ -112,14 +106,12 @@ export default function Hero({ summary, contact }: HeroSectionProps) {
 
           {/* Wrapped Get in Touch Button */}
           <div className="inline-block rounded-full bg-[hsl(var(--primary))] px-8 py-3 shadow-lg border-2 border-[hsl(var(--accent))]">
-            <motion.a
-              href="#contact"
+            <Link
+              href="/contact"
               className="block text-lg font-semibold text-[hsl(var(--foreground))] transition-colors duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               Get in Touch
-            </motion.a>
+            </Link>
           </div>
         </motion.div>
         {/* Profile Image */}
@@ -130,7 +122,7 @@ export default function Hero({ summary, contact }: HeroSectionProps) {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <Image
-            src="/profile_pic.jpg" // Replace with your actual profile image path
+            src="/profile_pic.jpg"
             alt={displayName}
             width={400}
             height={400}

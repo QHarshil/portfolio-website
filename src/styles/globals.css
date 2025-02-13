@@ -1,69 +1,158 @@
+/* src/styles/globals.css */
+
+/* -----------------------------------------------------------------------------
+   Tailwind CSS Directives
+----------------------------------------------------------------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* -----------------------------------------------------------------------------
+   CSS Reset & Box-Sizing
+----------------------------------------------------------------------------- */
+/* Modern CSS reset to ensure consistency across browsers */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 90%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* -----------------------------------------------------------------------------
+   Keyframes & Animations
+----------------------------------------------------------------------------- */
+@keyframes fadeInBackground {
+  from { background-color: transparent; }
+  to { background-color: hsl(var(--background)); }
+}
+
+/* -----------------------------------------------------------------------------
+   Base Styles
+----------------------------------------------------------------------------- */
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  animation: fadeInBackground 1s ease-out forwards;
+}
+
+a {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: hsl(var(--secondary));
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+:focus {
+  outline: 2px dashed hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* -----------------------------------------------------------------------------
+   CSS Custom Properties (Design Tokens)
+----------------------------------------------------------------------------- */
 @layer base {
   :root {
-    /* Light Mode: Elegant Warm Minimalism */
-    --background: 48, 100%, 97%;            /* Warm off-white (e.g., #FFF8E6) */
-    --foreground: 0, 0%, 20%;               /* Dark charcoal text */
-    
-    --card: 48, 100%, 93%;                  /* Slightly darker cream for cards */
-    --card-foreground: 0, 0%, 20%;
-    
-    --popover: 48, 100%, 93%;               /* Same as card */
-    --popover-foreground: 0, 0%, 20%;
-    
-    --primary: 45, 80%, 55%;                /* Warm gold accent (e.g., #C19A6B) */
-    --primary-foreground: 0, 0%, 100%;       /* White text on primary elements */
-    
-    --secondary: 5, 80%, 75%;                /* Soft blush accent */
-    --secondary-foreground: 0, 0%, 10%;      /* Nearly black text */
-    
-    --accent: 200, 50%, 50%;                /* Refined blue accent */
+    /* Light Mode: Complimentary Elegant Minimalism */
+    --background: 0, 0%, 97%;             /* Off-white background */
+    --foreground: 0, 0%, 10%;             /* Almost black text */
+
+    --card: 0, 0%, 100%;                  /* Pure white for cards */
+    --card-foreground: 0, 0%, 10%;
+
+    --popover: 0, 0%, 100%;
+    --popover-foreground: 0, 0%, 10%;
+
+    --primary: 51, 100%, 50%;             /* Gold (#FFD700) */
+    --primary-foreground: 0, 0%, 100%;      /* White text on primary elements */
+
+    --secondary: 210, 10%, 82%;           /* Light gray (#D1D5DB) for secondary text */
+    --secondary-foreground: 0, 0%, 10%;
+
+    --accent: 51, 100%, 50%;              /* Gold accent (same as primary) */
     --accent-foreground: 0, 0%, 100%;
-    
-    --destructive: 0, 80%, 50%;             /* Strong red for destructive actions */
+
+    --destructive: 0, 80%, 50%;           /* Strong red */
     --destructive-foreground: 0, 0%, 100%;
-    
-    --border: 48, 100%, 90%;                /* Soft light beige border */
-    --input: 48, 100%, 90%;
-    --ring: 30, 70%, 45%;                  /* Darker gold ring for focus */
-    
+
+    --border: 0, 0%, 90%;                 /* Light border */
+    --input: 0, 0%, 90%;
+    --ring: 51, 100%, 50%;                /* Gold ring for focus */
+
     --radius: 0.75rem;
-    
-    /* Typography */
-    --font-body: 'Lora', 'Poppins', sans-serif;
-    --font-heading: 'Playfair Display', 'Garamond', 'EB Garamond', 'Merriweather', serif;
-    --font-monospace: 'Fira Code', monospace;
+
+    /* Typography: using the default Tailwind system sans-serif stack */
+    --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    --font-monospace: "Fira Code", monospace;
   }
 
   .dark {
-    /* Dark Mode: Futuristic Elegant with Cool Undertones */
-    --background: 220, 10%, 8%;           /* Deep near-black (e.g., #0A0A0B) */
-    --foreground: 0, 0%, 90%;             /* Soft light gray (#E4E7EB) */
-    
-    --card: 220, 10%, 12%;                /* Slightly lighter than background for cards (#121417) */
-    --card-foreground: 0, 0%, 90%;
-    
-    --popover: 220, 10%, 12%;
-    --popover-foreground: 0, 0%, 90%;
-    
-    --primary: 210, 70%, 50%;             /* Deep cool blue (#4C5FD5) */
+    /* Dark Mode: Exact Theme */
+    --background: 0, 0%, 10%;             /* Dark gray, almost black (#1A1A1A) */
+    --foreground: 0, 0%, 100%;            /* White text */
+
+    --card: 0, 0%, 12%;                 /* Slightly lighter than background for cards */
+    --card-foreground: 0, 0%, 100%;
+
+    --popover: 0, 0%, 12%;
+    --popover-foreground: 0, 0%, 100%;
+
+    --primary: 51, 100%, 50%;            /* Gold (#FFD700) */
     --primary-foreground: 0, 0%, 100%;
-    
-    --secondary: 30, 70%, 50%;            /* Warm gold accent (#C19A6B) */
-    --secondary-foreground: 0, 0%, 10%;
-    
-    --accent: 210, 80%, 60%;              /* Lighter cool blue accent */
+
+    --secondary: 210, 10%, 82%;          /* Light gray (#D1D5DB) */
+    --secondary-foreground: 0, 0%, 100%;
+
+    --accent: 51, 100%, 50%;             /* Gold accent */
     --accent-foreground: 0, 0%, 100%;
-    
+
     --destructive: 0, 80%, 50%;
     --destructive-foreground: 0, 0%, 100%;
-    
-    --border: 220, 10%, 15%;              /* Subtle dark border */
-    --input: 220, 10%, 15%;
-    --ring: 210, 70%, 55%;
+
+    --border: 0, 0%, 20%;               /* Dark border */
+    --input: 0, 0%, 20%;
+    --ring: 51, 100%, 50%;
   }
 
   /* Utility class for border color using our token */
@@ -80,7 +169,7 @@
 }
 
 /* -----------------------------------------------------------------------------
-   Base Component Styles & Custom Utilities
+   Component Styles & Custom Utilities
 ----------------------------------------------------------------------------- */
 @layer components {
   .glass-effect {
@@ -112,7 +201,7 @@
 }
 
 /* -----------------------------------------------------------------------------
-   Global CSS Reset (if needed, can be adjusted further)
+   Global CSS Reset (if needed)
 ----------------------------------------------------------------------------- */
 @layer base {
   html, body, div, span, applet, object, iframe,
@@ -131,7 +220,7 @@
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
+    font-size: 90%;
     font: inherit;
     vertical-align: baseline;
   }

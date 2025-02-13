@@ -5,13 +5,32 @@ export async function GET() {
   try {
     const cv = {
       summary: "Software Development Engineer with an MSc in Computer Science. Experienced in designing scalable, fault-tolerant systems, distributed computing, and cloud automation (AWS, Kubernetes). Proficient in machine learning (NLP, Computer Vision), event-driven architectures, high-performance applications, and optimizing large-scale data pipelines for low-latency, compute-intensive workflows.",
-      skills: {
-        languages: ["Python", "Java", "SQL", "JavaScript", "TypeScript", "C++", "Go", "C", "HTML/CSS"],
-        cloudPlatforms: ["AWS (S3, Lambda)", "Google Cloud", "Docker", "Kubernetes", "PostgreSQL", "Git", "CI/CD"],
-        frameworks: ["Spring Boot", "React.js", "Node.js", "FastAPI/Flask", "Nest.js", "Next.js"],
-        aI: ["PyTorch", "Scikit-Learn", "Transformers (BERT, GPT, Swin)", "OpenCV"],
-        dataEngineering: ["YOLOv5", "Mask R-CNN", "XGBoost", "LSTM", "Mediapipe.js", "Pandas", "NumPy", "Matplotlib", "Databricks", "Apache Spark"]
-      },
+      "skills": {
+    "languages": [
+      "Python", "Java", "SQL", "JavaScript", "TypeScript",
+      "C++", "Go", "C", "HTML/CSS"
+    ],
+    "cloud & DevOps": [
+      "AWS (S3, Lambda)", "Google Cloud", "Docker", 
+      "Kubernetes", "Git", "CI/CD",
+    ],
+    "databases": ["PostgreSQL", "MySQL", "MongoDB", "Redis"],
+    "web & BackendFrameworks": [
+      "Spring Boot", "React.js", "Node.js", 
+      "FastAPI", "Flask", "Nest.js", "Next.js", "Express", "Django"
+    ],
+    "AI & ML": [
+      "PyTorch", "Scikit-Learn", "Transformers (BERT, GPT, Swin)", 
+      "YOLOv5", "Mask R-CNN", "XGBoost", "LSTM", 
+      "Mediapipe.js", "OpenCV"
+    ],
+    "data Engineering & Analytics": [
+      "Pandas", "NumPy", "Matplotlib", "Databricks", "Apache Spark"
+    ],
+    "Quantitative Skills": ["Statistical Analysis", "Data Visualization", "Trading Strategies", "Predictive Modelling", "Regression Analysis",
+      "Hypothesis Testing", "A/B Testing", "Time Series Analysis", "Cluster Analysis", "Trade-off Analysis"
+    ],
+  },
       professionalExperience: [
         {
           role: "Graduate Teaching Assistant",
@@ -58,7 +77,7 @@ export async function GET() {
         },
         {
           degree: "Master of Business Administration (MBA)",
-          institution: "university of San Francisco",
+          institution: "University of San Francisco",
           dates: "September 2021 – April 2023",
           coursework: ["Financial Modelling", "Predictive Analytics", "Agile Project Management", "Consulting Practices", "Market Research Methods"]
         },
