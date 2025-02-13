@@ -12,7 +12,6 @@ import {
   Briefcase,
   GraduationCap,
   Cog,
-  ExternalLink,
   Book,
   Plane,
   Music,

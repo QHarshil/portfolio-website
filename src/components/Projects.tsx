@@ -1,12 +1,11 @@
-// src/app/projects/page.tsx
+// src/components/Projects.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 
-// TypeScript interface for a Project
 export interface Project {
   id: string;
   title: string;
@@ -15,9 +14,11 @@ export interface Project {
   link?: string;           // External URL for project details (optional)
 }
 
-/* =============================================================================
-   ANIMATION VARIANTS
-============================================================================= */
+interface ProjectsProps {
+  projects: Project[];
+}
+
+// Animation variants for the flashcards
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: (index: number) => ({
@@ -32,13 +33,7 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.15 } },
 };
 
-/* =============================================================================
-   ALTERNATING TECHNOLOGY COLORS
-============================================================================= */
-/**
- * Array of Tailwind classes for alternating tech badge colors.
- * Rotates every 4 badges.
- */
+// Array of Tailwind classes for alternating tech badge colors (rotates every 4 badges)
 const alternatingTechColors = [
   "bg-[hsl(350,70%,80%)] text-[hsl(350,70%,20%)]",  // Soft pink
   "bg-[hsl(45,80%,70%)] text-[hsl(45,80%,20%)]",    // Warm gold
@@ -46,55 +41,9 @@ const alternatingTechColors = [
   "bg-[hsl(5,80%,80%)] text-[hsl(5,80%,20%)]",       // Soft rose
 ];
 
-/* =============================================================================
-   PROJECTS COMPONENT
-============================================================================= */
-/**
- * ProjectsPage Component
- * ------------------------
- * Fetches project data from the API and displays each project as a flashcard.
- * Each flashcard is clickable and navigates to either the external link or to
- * the internal dynamic route `/projects/[id]` for the full project details.
- */
-export default function ProjectsPage() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchProjects() {
-      try {
-        const response = await fetch("/api/projects");
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data: Project[] = await response.json();
-        setProjects(data);
-      } catch (err) {
-        console.error("Error fetching projects:", err);
-        setError("Failed to load projects. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProjects();
-  }, []);
-
-  if (loading) {
-    return (
-      <section className="py-16 flex items-center justify-center">
-        <p className="text-xl text-[hsl(var(--foreground))]">Loading projects...</p>
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section className="py-16 flex items-center justify-center">
-        <p className="text-xl text-red-500">{error}</p>
-      </section>
-    );
-  }
+export default function Projects({ projects }: ProjectsProps) {
+  // Limit featured projects to 6 if needed
+  const featuredProjects = projects.slice(0, 6);
 
   return (
     <section id="projects" className="py-20 bg-[hsl(var(--background))]">
@@ -109,8 +58,8 @@ export default function ProjectsPage() {
           viewport={{ once: true }}
           variants={staggerContainer}
         >
-          {projects.slice(0, 6).map((project, index) => {
-            // Determine the link URL: if project.link exists, use that; otherwise use the dynamic route.
+          {featuredProjects.map((project, index) => {
+            // Use the project's external link if provided, otherwise navigate to the dynamic route.
             const href = project.link ? project.link : `/projects/${project.id}`;
             return (
               <Link key={project.id} href={href} passHref>
@@ -136,7 +85,10 @@ export default function ProjectsPage() {
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {(project.technologies || []).map((tech, techIndex) => {
-                              const altColor = alternatingTechColors[techIndex % alternatingTechColors.length];
+                              const altColor =
+                                alternatingTechColors[
+                                  techIndex % alternatingTechColors.length
+                                ];
                               return (
                                 <Badge
                                   key={techIndex}

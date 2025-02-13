@@ -1,7 +1,21 @@
 // app/api/projects/[id]/route.ts
 import { NextResponse } from "next/server";
 
-const projectsFull: Record<string, any> = {
+interface CodeSnippet {
+  caption: string;
+  code: string;
+}
+
+interface ProjectDetails {
+  id: string;
+  title: string;
+  techStack: string;
+  summary: string;
+  fullDescription: string;
+  codeSnippets: CodeSnippet[];
+}
+
+const projectsFull: Record<string, ProjectDetails> = {
   trading: {
     id: "trading",
     title: "High‑Frequency Algorithmic Trading Engine for IMC Trading Propserity 2",
@@ -139,8 +153,8 @@ export async function getStaticProps({ params }) {
   },
 };
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const project = projectsFull[id];
 
   if (!project) {

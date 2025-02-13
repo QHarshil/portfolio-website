@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Code2, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 
@@ -28,10 +27,10 @@ const cardVariants = {
   }),
 };
 
-const fadeInVariants = {
+/*const fadeInVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.5, delay: 0.3 } },
-};
+};*/
 
 const staggerContainer = {
   hidden: {},

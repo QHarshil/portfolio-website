@@ -1,1 +1,0 @@
-// About page (biography and 'About This Project')

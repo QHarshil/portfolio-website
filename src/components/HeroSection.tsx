@@ -10,7 +10,7 @@ export interface HeroSectionProps {
   summary: string;
   contact: {
     name: string;
-    title: string;
+    title?: string;
   };
 }
 
@@ -52,7 +52,7 @@ export default function Hero({ summary, contact }: HeroSectionProps) {
             transition={{ duration: 0.8 }}
             whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}
           >
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="text-[hsl(var(--primary))]">{displayName}</span>
           </motion.h1>
           <motion.h2

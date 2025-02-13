@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Header from "@/components/Header";
-import { ExternalLink } from "lucide-react";
 
 interface ProjectDetail {
   id: string;
