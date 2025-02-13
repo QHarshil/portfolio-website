@@ -1,23 +1,19 @@
-/** @type {import('ts-jest').InitialOptionsTsJest} */
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jest-environment-jsdom',
-    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-    moduleNameMapper: {
-      '^@/(.*)$': '<rootDir>/src/$1'
-    },
-    // Use babel-jest to transform files including ESM modules
+    // Use ts-jest to transform all JS/TS files and include lucide-react from node_modules.
     transform: {
-      '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest'
+      '^.+\\.(js|jsx|ts|tsx)$': ['ts-jest', { tsconfig: 'tsconfig.jest.json' }],
     },
-    // Do not ignore ESM modules like lucide-react and @lucide
+    // Override the default behavior to transform lucide-react even though it’s in node_modules.
     transformIgnorePatterns: [
-      "/node_modules/(?!lucide-react|@lucide/)"
+      "/node_modules/(?!lucide-react)"
     ],
-    globals: {
-      'ts-jest': {
-        tsconfig: '<rootDir>/tsconfig.jest.json'
-      }
-    }
+    moduleNameMapper: {
+      '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+      '^@/(.*)$': '<rootDir>/src/$1',
+    },
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   };
   
