@@ -9,7 +9,7 @@ export async function GET() {
         languages: ["Python", "Java", "SQL", "JavaScript", "TypeScript", "C++", "Go", "C", "HTML/CSS"],
         cloudPlatforms: ["AWS (S3, Lambda)", "Google Cloud", "Docker", "Kubernetes", "PostgreSQL", "Git", "CI/CD"],
         frameworks: ["Spring Boot", "React.js", "Node.js", "FastAPI/Flask", "Nest.js", "Next.js"],
-        aiMl: ["PyTorch", "Scikit-Learn", "Transformers (BERT, GPT, Swin)", "OpenCV"],
+        aI: ["PyTorch", "Scikit-Learn", "Transformers (BERT, GPT, Swin)", "OpenCV"],
         dataEngineering: ["YOLOv5", "Mask R-CNN", "XGBoost", "LSTM", "Mediapipe.js", "Pandas", "NumPy", "Matplotlib", "Databricks", "Apache Spark"]
       },
       professionalExperience: [
@@ -55,6 +55,12 @@ export async function GET() {
             "Object Oriented Design", "Distributed Systems", "Machine Learning", "Natural Language Processing", "Computer Vision",
             "Algorithms", "Large-Scale Data Processing", "Cloud Computing", "Data Structures & Algorithms"
           ]
+        },
+        {
+          degree: "Master of Business Administration (MBA)",
+          institution: "university of San Francisco",
+          dates: "September 2021 – April 2023",
+          coursework: ["Financial Modelling", "Predictive Analytics", "Agile Project Management", "Consulting Practices", "Market Research Methods"]
         },
         {
           degree: "Bachelor of Science in LIFE SCIENCE (Focus: Chemistry)",
