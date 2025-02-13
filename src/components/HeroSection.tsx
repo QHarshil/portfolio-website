@@ -27,7 +27,7 @@ export default function Hero({ summary, contact }: HeroSectionProps) {
 
   const displayName = contact?.name || "Your Name";
   const displayTitle =
-    contact?.title || "Full-Stack Developer | Ex-Product Manager";
+    contact?.title || "Software Engineer | Ex-Product Manager";
 
   return (
     <motion.section

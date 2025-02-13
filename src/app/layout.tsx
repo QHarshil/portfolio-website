@@ -1,64 +1,57 @@
 // src/app/layout.tsx
-import "../styles/globals.css"; // Global CSS: resets, Tailwind directives, and custom properties
+import "../styles/globals.css"; // Global CSS for resets, Tailwind directives, and custom properties
 import { ThemeProvider } from "../context/ThemeContext";
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 
-// Initialize Google Fonts and assign them to custom CSS variables.
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-});
+// Initialize and assign Google Fonts to CSS variables.
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
-// Define metadata for SEO, Open Graph, and other purposes.
+// Enhanced SEO and Open Graph metadata with direct meta tags.
 export const metadata: Metadata = {
-  title: "Harshil Chudasama | Full-Stack Engineer & Product Leader",
+  title: "Harshil Chudasama | Software Developer | Ex-Product Manager",
   description:
-    "Explore the portfolio of Harshil Chudasama, a visionary Full-Stack Engineer and Ex-Product Manager. With expertise in scalable systems, cloud automation, and cross-functional leadership, Harshil delivers innovative digital solutions that push the boundaries of technology.",
+    "Portfolio of Harshil Chudasama, Full-Stack Engineer and Ex-Product Manager with expertise in distributed systems, cloud automation, and algorithm optimization.",
   openGraph: {
-    title: "Harshil Chudasama | Portfolio",
+    title: "Harshil Chudasama | Software Developer | Ex-Product Manager",
     description:
-      "Discover projects and skills from Harshil Chudasama — a seasoned Full-Stack Engineer and Product Leader with a passion for innovation and technology.",
-    url: "https://yourportfolio.com", // Replace with your actual URL
+      "Explore Harshil Chudasama's projects and expertise in full-stack engineering and cross-functional leadership.",
+    url: "https://qharshil.ca",
     siteName: "Harshil Chudasama Portfolio",
-    images: [
-      {
-        url: "https://yourportfolio.com/og-image.png", // Replace with your Open Graph image URL
-        width: 1200,
-        height: 630,
-        alt: "Harshil Chudasama Portfolio",
-      },
-    ],
+    images: [{
+      url: "/profile_pic.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Harshil Chudasama Portfolio Preview",
+    }],
     locale: "en_US",
     type: "website",
   },
-  // Additional meta tags can be added here.
+  twitter: {
+    card: "summary_large_image",
+    site: "@HarshilChudasama",
+    title: "Harshil Chudasama | Software Developer",
+    description: "Software Developer and Ex-Product Manager portfolio featuring projects, achievements, and skills.",
+    images: ["/profile_pic.jpg"],
+  },
 };
 
 /**
  * RootLayout Component
  * ======================
- *
- * Wraps the entire application with global configurations:
- * - Global CSS is imported for resets, utilities, and custom properties.
- * - Custom fonts are initialized and set as CSS variables.
- * - SEO and Open Graph metadata are defined.
- * - The entire app is wrapped in a ThemeProvider for centralized dark/light mode management.
- *
- * Author: Harshil Chudasama
- * Date: February 7, 2025
+ * - Loads global styles and fonts.
+ * - Provides SEO metadata for Open Graph and Twitter.
+ * - Adds a direct Open Graph meta tag for compatibility.
  */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <head>
-        {/* Additional head elements (favicon, extra meta tags, etc.) can be added here */}
+        <meta property="og:image" content="/profile_pic.jpg" />
+        <link rel="canonical" href="https://qharshil.ca" />
       </head>
-      <body className="antialiased">
+      <body className="antialiased bg-gray-50 text-gray-900">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
