@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const summary = "Software Development Engineer with an MSc in Computer Science, skilled in designing scalable, fault‑tolerant systems, distributed computing, and cloud automation (AWS, Kubernetes). Proficient in machine learning (NLP, Computer Vision), event‑driven architectures, and optimizing large‑scale data pipelines for low‑latency, compute‑intensive workflows. I excel at solving complex technical challenges, leading cross‑functional teams in agile environments, and bridging the gap between engineering and business.";
+    const summary = "Software Development Engineer with an MSc in Computer Science, specializing in building scalable, fault-tolerant backend services, distributed computing, and cloud automation (AWS, Kubernetes, Docker). Experienced in designing event-driven architectures, optimizing large-scale data pipelines, and deploying AI/ML models into production systems (NLP, Computer Vision). Proficient in backend frameworks (Spring Boot, Nest.js) and database optimizations (PostgreSQL, Redis) for high-performance, low-latency applications. Passionate about solving complex technical challenges and collaborating in agile, cross-functional teams to drive innovation.";
     return NextResponse.json({ summary });
   } catch (error) {
     console.error("Error fetching summary:", error);

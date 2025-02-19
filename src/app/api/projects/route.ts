@@ -11,11 +11,11 @@ const projectsSummary = [
       "Engineered a low‑latency trading system that integrates quantitative finance models and rigorous backtesting to drive profit generation in a real‑time simulated market, achieving top 1% performance.",
   },
   {
-    id: "cloud-platform",
-    title: "Cloud‑Native Distributed Service Platform for Scalable Applications",
-    technologies: ["Node.js (Nest.js)", "Spring Boot", "Docker", "Kubernetes", "AWS", "Terraform", "PostgreSQL", "Redis"],
+    id: "ecommerce-platform",
+    title: "Distributed Microservices E-Commerce Platform",
+    technologies: ["Spring Boot (Java)", "Nest.js (Node.js)", "PostgreSQL", "Redis", "Kubernetes", "Docker", "AWS"],
     summary:
-      "Developed a robust microservices architecture that leverages containerization and CI/CD automation to ensure high‑throughput, fault‑tolerant backend transactions in a production‑grade cloud environment.",
+      "Built a high-performance e-commerce backend with distributed microservices, implementing database sharding, caching, and CI/CD automation to optimize query efficiency and ensure zero-downtime deployments.",
   },
   {
     id: "data-pipeline",

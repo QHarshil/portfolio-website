@@ -33,29 +33,29 @@ const projectsFull: Record<string, ProjectDetails> = {
       },
     ],
   },
-  "cloud-platform": {
-    id: "cloud-platform",
-    title: "Cloud‑Native Distributed Service Platform for Scalable Applications",
+  "ecommerce-platform": {
+    id: "ecommerce-platform",
+    title: "Distributed Microservices E-Commerce Platform",
     techStack:
-      "Node.js (Nest.js), Spring Boot, Docker, Kubernetes, AWS, Terraform, PostgreSQL, Redis",
+      "Spring Boot (Java), Nest.js (Node.js), PostgreSQL, Redis, Kubernetes, Docker, AWS",
     summary:
-      "A microservices-based platform designed to handle high transaction volumes with fault tolerance and minimal downtime. It decomposes a monolithic architecture into containerized services and streamlines deployments using CI/CD.",
+      "A high-performance e-commerce platform leveraging distributed microservices to optimize order processing, ensure scalability, and enable zero-downtime deployments through CI/CD automation.",
     fullDescription:
-      "As part of my Master’s coursework in scalable and distributed systems, I developed a cloud‑native distributed service platform that simulates a production‑grade backend environment. The project’s objective was to build a prototype capable of handling high transaction volumes with fault tolerance and minimal downtime—a scenario commonly faced in modern tech enterprises. I deconstructed a monolithic architecture into several microservices using Node.js (Nest.js) for flexible service development and Spring Boot for components demanding high throughput. Each microservice was containerized with Docker and orchestrated using Kubernetes on AWS, ensuring robust auto‑scaling and load balancing. PostgreSQL served as the primary data store, while Redis caching reduced query response times by 25–30%. A CI/CD pipeline built with Terraform and GitHub Actions streamlined deployments and reduced cycle times by roughly 20%. This project honed my skills in cloud orchestration, inter‑service communication, and DevOps automation.",
+      "As part of my Master’s coursework in scalable and distributed systems, I developed a distributed microservices e-commerce platform capable of handling high transaction loads while maintaining fault tolerance and seamless scalability. The system was designed with a modular architecture where Spring Boot (Java) powered transaction-heavy services, and Nest.js (Node.js) handled dynamic request processing. PostgreSQL was optimized using database sharding and read replicas to efficiently manage concurrent transactions, while Redis caching reduced query response times by up to 30%. Kubernetes orchestrated the containerized services, ensuring high availability and auto-scaling, while AWS provided cloud-based infrastructure for compute, storage, and networking. The CI/CD pipeline, implemented with Docker and GitHub Actions, automated deployments with zero downtime, reducing development iteration cycles by 25%. This project enhanced my expertise in backend scalability, API optimization, and cloud-native infrastructure design.",
     codeSnippets: [
       {
-        caption: "Kubernetes Deployment YAML",
+        caption: "Kubernetes Deployment YAML for Order Service",
         code: `apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-service-deployment
+  name: order-service-deployment
 spec:
   replicas: 3
   template:
     spec:
       containers:
-      - name: my-service
-        image: my-service-image:latest`,
+      - name: order-service
+        image: order-service-image:latest`,
       },
     ],
   },
